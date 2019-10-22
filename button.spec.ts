@@ -1,3 +1,4 @@
+import "jest";
 import Button from "./button.svelte";
 import { render } from '@testing-library/svelte';
 
