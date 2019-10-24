@@ -23,6 +23,7 @@
     border-radius: 5px;
     width: 60px;
     min-height: 25px;
+    letter-spacing: 1px;
   }
 </style>
 
