@@ -1,20 +1,24 @@
 <script>
   import { onMount } from "svelte";
   export let color = "#624695";
+  let checkmark, radio;
 
-  let checkmark;
+  function onMouseOver(evt) {
+    checkmark.style.borderColor = !radio.checked && color;
+  }
 
-  onMount(() => {
-    checkmark.style.borderColor = color;
-  });
+  function onMouseOut() {
+    checkmark.style.borderColor = !radio.checked && "#cecece";
+  }
+
 </script>
 
 <style>
   .container {
     display: block;
     position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
+    padding: 2px 0 0 25px;
+    margin-bottom: 5px;
     cursor: pointer;
     user-select: none;
   }
@@ -33,7 +37,7 @@
     width: 18px;
     background-color: transparent;
     border-radius: 50%;
-    border: solid 2px #CECECE;
+    border: solid 2px #cecece;
   }
 
   .container input:checked ~ .checkmark {
@@ -41,7 +45,7 @@
   }
 </style>
 
-<label class=container>
-  <input type=radio/>
+<label class=container on:mouseover={onMouseOver} on:mouseout={onMouseOut}>
+  <input bind:this={radio} type=radio/>
   <span class=checkmark bind:this={checkmark}/>
 </label>
