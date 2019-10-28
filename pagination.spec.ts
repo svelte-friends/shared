@@ -14,4 +14,16 @@ describe("Pagination Test Suite", () => {
         expect(bg).toBe("red");
     });
 
+    it("If you do not receive color use the default", () => {
+        const container = document.body;
+        render(Pagination);
+        const active = container.querySelector(".active");
+        const bg = getComputedStyle(active).getPropertyValue("background-color");
+        expect(bg).toBe("rgb(98, 70, 149)");
+    });
+
+    afterEach(() => {
+        cleanup();
+    });
+
 });
