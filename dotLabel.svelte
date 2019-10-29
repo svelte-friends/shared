@@ -1,29 +1,18 @@
 <script>
   import { onMount } from "svelte";
   export let number = "";
-  export let color;
-//   export let type = "fill"; //fill or outline
+  export let colorText = "#000";
+  export let colorBadge = "#624695";
+  export let textBadge = "white";
   export let text = "Texto";
-  let dotLabel;
-  let colorText;
+  export let size = "default"; // small
 
-  onMount(() => {
-    colorText.style.color = color;
-  });
+  let badgeClass = "";
+
+  
 </script>
 
 <style>
-  .dotLabel {
-    display: flex;
-    justify-content: center;
-    font-size: 10px;
-    color: var(--labelColor, white);
-    border-radius: 5px;
-    width: 10px;
-    min-height: 10px;
-    letter-spacing: 1px;
-  }
-
   .textLabel {
     font-family: Poppins;
     font-size: 14px;
@@ -32,10 +21,30 @@
     font-style: normal;
     line-height: normal;
     letter-spacing: 0.25px;
+    margin-left: 6px;
+  }
+ 
+  .badgeDefault {
+    border-radius: 100%;
+    width: 10px;
+    height: 10px;
+  }
+  .dotLabel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    padding: 3.5px;
+    margin-left: 6px;
+  }
+  .content {
+    display: flex;
+    align-items: center;
   }
 </style>
 
-<div class="textLabel">
-  <span bind:this={colorText}>{text}</span>
-  <!-- <div class="dotLabel" style={inLine}>{number}</div> -->
+<div class="content">
+  <div class="textLabel" style={`color: ${colorText}`}>{text}</div>
+  <div class="dotLabel badgeDefault" style={`background-color: ${colorBadge}`}>
+  </div>
 </div>
