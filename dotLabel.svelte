@@ -8,9 +8,14 @@
   export let size = "default"; // small
   
   let badgeClass = "";
-
+  if (number === "") {
+    if (size === "small") badgeClass = "badgeSmall";
+    else badgeClass = "badgeDefault";
+  }
+  if (number.length === 1) badgeClass = "badgeOne";
+  if (number.length > 1) badgeClass = "badgeMore";
+  
 </script>
-
 <style>
   .textLabel {
     font-family: Poppins;
@@ -22,7 +27,21 @@
     letter-spacing: 0.25px;
     margin-left: 6px;
   }
-  
+  .badgeMore {
+    width: 24px;
+    height: 16px;
+    border-radius: 8px;
+  }
+  .badgeOne {
+    width: 18px;
+    height: 18px;
+    border-radius: 100%;
+  }
+  .badgeSmall {
+    border-radius: 100%;
+    width: 6px;
+    height: 6px;
+  }
   .badgeDefault {
     border-radius: 100%;
     width: 10px;
@@ -45,7 +64,7 @@
 <div class="content">
   <div class="textLabel" style={`color: ${colorText}`}>{text}</div>
   <div
-    class="dotLabel badgeDefault"
+    class="dotLabel {badgeClass}"
     style={`background-color: ${colorBadge}`}>
     <div style={`color:${textBadgeColor}`}>{number}</div>
   </div>
