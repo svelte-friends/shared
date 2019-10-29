@@ -33,11 +33,18 @@ describe("Pagination Test Suite", () => {
     it("Use the color to flag the current page", () => {
         const container = document.body;
         render(Pagination, {props: {active: 4, color:'red'}});
-        const item = container.querySelector("ul").children[3];
+        const item = container.querySelector(".active");
         const bg = getComputedStyle(item).getPropertyValue("background-color");
-        const index = item.querySelector("a").getAttribute("data-index");
+        const index = item.getAttribute("data-index");
         expect(JSON.parse(index)).toBe(4);
-        expect(bg).toBe('rgb(239, 239, 239)');
+        expect(bg).toBe('red');
+    });
+
+    it("If you are on the first page, do not show the previous arrow", () => {
+        const container = document.body;
+        render(Pagination, {props: {active: 1}});
+        const item = container.querySelector("ul").firstElementChild;
+        expect(item.classList.contains("item")).toBe(true);
     });
 
     afterEach(() => {
