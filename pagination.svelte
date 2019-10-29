@@ -4,7 +4,7 @@ export let color = '#624695';
 export let total = 20;
 export let showPages = 5;
 export let active= 1;
-
+let previous = "<";
 let startAt = 1;
 let bgActive = `background-color: ${color};`;
 const range =   [...Array(total).keys()].map(i => i + startAt);
@@ -83,10 +83,25 @@ a {
   color: #8c8c8c;
 }
 
+.link{
+background-color: #efefef;
+color: #8c8c8c;
+width: 30px;
+height: 30px;
+border-radius: 15px;
+display: flex;
+align-items: center;
+justify-content: center;
+
+}
+
 </style>
 
 <div class="container">
 <ul>
+{#if active > 1}
+  <li class="link"><a href="#">{previous}</a></li>
+{/if}
 
 {#each range as n }
   <li class="item"><a data-index={n}
