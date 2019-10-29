@@ -1,11 +1,17 @@
 <script>
 import { onMount } from "svelte";
 export let color = '#624695';
-let active;
+export let total = 20;
+export let showPages = 5;
+export let active= 1;
 
-  onMount(() => {
-    active.style.backgroundColor = color;
-  });
+let startAt = 1;
+let bgActive = `background-color: ${color};`;
+const range =   [...Array(total).keys()].map(i => i + startAt);
+
+const isActive = (index) => {
+   return  active === index;
+};
 
 </script>
 
@@ -32,7 +38,7 @@ display: inline-flex;
 
 }
 
-.item{
+.item {
   width: 30px;
   height: 30px;
   font-size: 14px;
@@ -48,7 +54,7 @@ display: inline-flex;
   text-decoration: none;
 }
 
-.active{
+.active {
   width: 30px;
   height: 30px;
   border-radius: 10px;
@@ -58,7 +64,7 @@ display: inline-flex;
 }
 
 .first {
- margin-left: 10px;
+  margin-left: 10px;
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
   width: 40px;
@@ -71,7 +77,7 @@ display: inline-flex;
  width: 40px;
 }
 
-a{
+a {
   text-decoration: none;
   text-align: center;
   color: #8c8c8c;
@@ -81,12 +87,14 @@ a{
 
 <div class="container">
 <ul>
-        <li class="item first"><a href="#">1</a></li>
-        <li class="item"><a  class=active bind:this={active} href="#">2</a></li>
-        <li class="item"><a  href="#">3</a></li>
-        <li class="item"><a  href="#">4</a></li>
-        <li class="item"><a  href="#">5</a></li>
-        <li class="item last"><a  href="#">6</a></li>
+
+{#each range as n }
+  <li class="item"><a data-index={n}
+  class="{isActive(n) && 'active'}"
+  style="{isActive(n) && bgActive}"
+  href="#">{n}</a></li>
+{/each}
+
 </ul>
 </div>
 

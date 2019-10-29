@@ -22,6 +22,14 @@ describe("Pagination Test Suite", () => {
         expect(bg).toBe("rgb(98, 70, 149)");
     });
 
+    it("Select receive which page will start", () => {
+        const container = document.body;
+        render(Pagination,  {props: {active: 2}});
+        const item = container.querySelector(".active");
+        const index = item.getAttribute("data-index");
+        expect(JSON.parse(index)).toBe(2);
+    });
+
     afterEach(() => {
         cleanup();
     });
