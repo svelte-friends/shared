@@ -47,6 +47,14 @@ describe("Pagination Test Suite", () => {
         expect(item.classList.contains("item")).toBe(true);
     });
 
+
+    it("If it's on the last page, don't show an arrow next", () => {
+        const container = document.body;
+        render(Pagination, {props: {total: 10, active: 10}});
+        const item = container.querySelector("ul").lastElementChild;
+        expect(item.classList.contains("item")).toBe(true);
+    });
+
     afterEach(() => {
         cleanup();
     });

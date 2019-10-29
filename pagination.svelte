@@ -2,7 +2,7 @@
 import { onMount } from "svelte";
 export let color = '#624695';
 export let total = 20;
-export let showPages = 5;
+export let displayRows= 5;
 export let active= 1;
 let previous = "<";
 let startAt = 1;
@@ -109,6 +109,10 @@ justify-content: center;
   style="{isActive(n) && bgActive}"
   href="#">{n}</a></li>
 {/each}
+
+{#if total !== active}
+  <li class="link"><a href="#"> > </a></li>
+{/if}
 
 </ul>
 </div>
