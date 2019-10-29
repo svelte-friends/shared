@@ -1,24 +1,14 @@
 import "jest";
 import RadioButton from "./radioButton.svelte";
-import { render, cleanup } from "@testing-library/svelte";
+import { render, cleanup, fireEvent } from "@testing-library/svelte";
 
 describe("RadioButton Test Suite", () => {
-  it("Render component with color", () => {
-    const { container } = render(RadioButton, {
-      props: {
-        color: "#2e7d32"
-      }
-    });
-    const radioButton = container.querySelector(".checkmark");
-    const borderColor = getComputedStyle(radioButton).getPropertyValue("border-color");
-    expect(borderColor).toBe("#2e7d32");
-  });
-
-  it("Render component with default color if color property not set", () => {
+  it("Check RadioButton by clicking in any part of component", async () => {
     const { container } = render(RadioButton);
-    const radioButton = container.querySelector(".checkmark");
-    const borderColor = getComputedStyle(radioButton).getPropertyValue("border-color");
-    expect(borderColor).toBe("#624695");
+    const radioButton = container.querySelector(".radio");
+    const input = container.querySelector(".radio input");
+    await fireEvent.click(radioButton);
+    expect(input.checked).toBe(true);
   });
 
   afterEach(() => {
