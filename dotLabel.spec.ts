@@ -7,10 +7,10 @@ describe("DotLabel Test Suite", () => {
 
     it("It should be possible to receive a color for the text:colorText", () => {
         const { getByText } = render(DotLabel, {
-            props: { colorText: "blue"}
+            props: { colorText: "blue" }
         });
         const dotlabelElement = getByText("Texto");
-        const bgColor = getComputedStyle(dotlabelElement,).getPropertyValue("color");
+        const bgColor = getComputedStyle(dotlabelElement).getPropertyValue("color");
         expect(bgColor).toBe("blue");
     });
 
@@ -29,6 +29,24 @@ describe("DotLabel Test Suite", () => {
         const dotLabelElement = container.querySelector(".dotLabel");
         const bgColor = getComputedStyle(dotLabelElement).getPropertyValue("background-color");
         expect(bgColor).toBe("rgb(98, 70, 149)");
+    });
+
+    it("Must be able to receive a Badge Number", () => {
+        const { getByText } = render(DotLabel, { props: { number: "1" } });
+        const dotLabelComponent = getByText("1");
+        expect(dotLabelComponent).toBeDefined();
+    });
+
+    it("It should be possible to receive a color for the Badge number: textBadge", () => {
+        const { getByText } = render(DotLabel, {
+            props: {
+                textBadgeColor: "blue",
+                number: "10"
+            }
+        });
+        const dotlabelElement = getByText("10");
+        const bgColor = getComputedStyle(dotlabelElement).getPropertyValue("color");
+        expect(bgColor).toBe("blue");
     });
 
 
