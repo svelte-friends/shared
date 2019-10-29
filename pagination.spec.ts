@@ -30,6 +30,16 @@ describe("Pagination Test Suite", () => {
         expect(JSON.parse(index)).toBe(2);
     });
 
+    it("Use the color to flag the current page", () => {
+        const container = document.body;
+        render(Pagination, {props: {active: 4, color:'red'}});
+        const item = container.querySelector("ul").children[3];
+        const bg = getComputedStyle(item).getPropertyValue("background-color");
+        const index = item.querySelector("a").getAttribute("data-index");
+        expect(JSON.parse(index)).toBe(4);
+        expect(bg).toBe('rgb(239, 239, 239)');
+    });
+
     afterEach(() => {
         cleanup();
     });
