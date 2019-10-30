@@ -34,6 +34,18 @@ describe("RadioButton Test Suite", () => {
     expect(radioButton).toBeInTheDocument();
   });
 
+  it("Send value property", () => {
+    const { getByDisplayValue } = render(RadioButton, {
+      props: {
+        label: "Blue",
+        color: "blue",
+        value: "blue"
+      }
+    });
+    const radioButton = getByDisplayValue("blue");
+    expect(radioButton).toBeInTheDocument();
+  })
+
   afterEach(() => {
     cleanup();
   });
