@@ -12,6 +12,17 @@ describe("RadioButton Test Suite", () => {
     expect(input).toBeChecked();
   });
 
+  it("Render RadioButton with property 'checked' set true", () => {
+    let { getByLabelText } = render(RadioButton, {
+      props: {
+        label: "Blue",
+        checked: true
+      }
+    });
+    const radioBlue = getByLabelText("Blue");
+    expect(radioBlue).toBeChecked();
+  });
+
   it("Send label property", () => {
     const { getByLabelText } = render(RadioButton, {
       props: {
