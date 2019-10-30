@@ -1,51 +1,47 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount, afterUpdate } from "svelte";
   export let color = "#624695";
-  let checkmark, radio;
-
-  function onMouseOver(evt) {
-    checkmark.style.borderColor = !radio.checked && color;
-  }
-
-  function onMouseOut() {
-    checkmark.style.borderColor = !radio.checked && "#cecece";
-  }
-
+  export let name = undefined;
 </script>
 
 <style>
-  .container {
+  .radio {
     display: block;
     position: relative;
     padding: 2px 0 0 25px;
     margin-bottom: 5px;
     cursor: pointer;
     user-select: none;
+    min-height: 18px;
   }
 
-  .container input {
+  .radio input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
   }
 
-  .checkmark {
+  .radio-checkmark {
     position: absolute;
     top: 0;
     left: 0;
     height: 18px;
     width: 18px;
-    background-color: transparent;
     border-radius: 50%;
-    border: solid 2px #cecece;
+    border: 2px solid #cecece;
   }
 
-  .container input:checked ~ .checkmark {
-    border: solid 6px;
+  .radio:hover input ~ .radio-checkmark {
+    border-color: var(--radio-border-color);
+  }
+
+  .radio input:checked ~ .radio-checkmark {
+    border-width: 6px;
+    border-color: var(--radio-border-color);
   }
 </style>
 
-<label class=container on:mouseover={onMouseOver} on:mouseout={onMouseOut}>
-  <input bind:this={radio} type=radio/>
-  <span class=checkmark bind:this={checkmark}/>
+<label class=radio style="--radio-border-color:{color}">
+  <input type=radio name={name} />
+  <span class=radio-checkmark />
 </label>
