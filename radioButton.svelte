@@ -2,6 +2,7 @@
   import { onMount, afterUpdate } from "svelte";
   export let color = "#624695";
   export let name = undefined;
+  export let label = "";
 </script>
 
 <style>
@@ -42,6 +43,7 @@
 </style>
 
 <label class=radio style="--radio-border-color:{color}">
+  {label}
   <input type=radio name={name} />
   <span class=radio-checkmark />
 </label>
