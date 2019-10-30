@@ -49,6 +49,17 @@ describe("DotLabel Test Suite", () => {
         expect(bgColor).toBe("blue");
     });
 
+    it("It should be possible to choose size type, default and small: example: default", () => {
+        const container = document.body;
+        render(DotLabel, { props: { size: "small"}});
+        render(DotLabel);
+
+        const dotLabelSmall = container.querySelector(".badgeSmall");
+        const dotLabelDefault = container.querySelector(".badgeDefault");
+        
+        expect(dotLabelSmall.classList.contains("badgeSmall")).toBe(true);
+        expect(dotLabelDefault.classList.contains("badgeDefault")).toBe(true);
+    });
 
     afterEach(() => {
         cleanup();
