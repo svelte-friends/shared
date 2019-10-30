@@ -1,4 +1,5 @@
 import "jest";
+import '@testing-library/jest-dom/extend-expect';
 import RadioButton from "./radioButton.svelte";
 import { render, cleanup, fireEvent } from "@testing-library/svelte";
 
@@ -8,7 +9,18 @@ describe("RadioButton Test Suite", () => {
     const radioButton = container.querySelector(".radio");
     const input = container.querySelector(".radio input");
     await fireEvent.click(radioButton);
-    expect(input.checked).toBe(true);
+    expect(input).toBeChecked();
+  });
+
+  it("Send label property", () => {
+    const { getByLabelText } = render(RadioButton, {
+      props: {
+        label: "Blue",
+        color: "blue",
+      }
+    });
+    const radioButton = getByLabelText("Blue");
+    expect(radioButton).toBeInTheDocument();
   });
 
   afterEach(() => {
