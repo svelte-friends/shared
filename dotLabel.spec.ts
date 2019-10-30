@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom/extend-expect';
+import { prettyDOM } from '@testing-library/dom';
 import 'jest';
 import { render, cleanup } from '@testing-library/svelte';
 import DotLabel from './dotLabel.svelte';
@@ -51,16 +52,22 @@ describe("DotLabel Test Suite", () => {
 
     it("It should be possible to choose size type, default and small: example: default", () => {
         const container = document.body;
-        render(DotLabel, { props: { size: "small"}});
+        render(DotLabel, { props: { size: "small" } });
         render(DotLabel);
 
         const dotLabelSmall = container.querySelector(".badgeSmall");
         const dotLabelDefault = container.querySelector(".badgeDefault");
-        
+
         expect(dotLabelSmall.classList.contains("badgeSmall")).toBe(true);
         expect(dotLabelDefault.classList.contains("badgeDefault")).toBe(true);
     });
 
+    it("In the case the number be larger than 99, the text should be replaced with 99+", () => {
+        const { getByText } = render(DotLabel, { props: { number: "101" } });
+        const textSpan = getByText("99+");
+        expect(textSpan).toBeDefined();
+    });
+    
     afterEach(() => {
         cleanup();
     });
