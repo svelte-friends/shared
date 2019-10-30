@@ -32,7 +32,7 @@ describe("Pagination Test Suite", () => {
 
     it("Use the color to flag the current page", () => {
         const container = document.body;
-        render(Pagination, {props: {active: 4, color:'red'}});
+        render(Pagination, {props: {total:100, active: 4, color:'red'}});
         const item = container.querySelector(".active");
         const bg = getComputedStyle(item).getPropertyValue("background-color");
         const index = item.getAttribute("data-index");
@@ -50,9 +50,17 @@ describe("Pagination Test Suite", () => {
 
     it("If it's on the last page, don't show an arrow next", () => {
         const container = document.body;
-        render(Pagination, {props: {total: 10, active: 10}});
+        render(Pagination, {props: {total: 100, active: 10}});
         const item = container.querySelector("ul").lastElementChild;
         expect(item.classList.contains("item")).toBe(true);
+    });
+
+
+    it("When a pagination has more than 10 pages, it shows as first 9 and shows one last page", () => {
+        const container = document.body;
+        render(Pagination, {props: {total: 20, displayRows: 1 }});
+        const length = container.querySelectorAll(".item").length;
+        expect(length).toBe(10);
     });
 
     afterEach(() => {
