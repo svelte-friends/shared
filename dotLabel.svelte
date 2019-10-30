@@ -6,7 +6,8 @@
   export let textBadgeColor = "white";
   export let text = "Texto";
   export let size = "default"; // small
-  
+
+
   let badgeClass = "";
   if (number === "") {
     if (size === "small") badgeClass = "badgeSmall";
@@ -14,11 +15,11 @@
   }
   if (number.length === 1) badgeClass = "badgeOne";
   if (number.length > 1) badgeClass = "badgeMore";
-  
+  if (number > 99) number = "99+";
 </script>
 <style>
   .textLabel {
-    font-family: Poppins;
+    font-family: var(--text-font-family);
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
