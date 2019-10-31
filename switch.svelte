@@ -1,8 +1,9 @@
 <script>
 
-  export let active = false;
-  export let color = "#b1d660"
-  export let buttonColor = "#e0fe9f"
+  export let on = false;
+  export let color = "#b1d660";
+  export let buttonColor = "#e0fe9f";
+  export let disabled = false;
 
 </script>
 
@@ -27,7 +28,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: #bababa;
     transition: 0.4s;
   }
 
@@ -54,6 +55,14 @@
     transform: translateX(17.3px);
   }
 
+  input:disabled + .slider{
+      background-color: #cecece;
+  }
+
+  input:disabled +.slider:before {
+     background-color:#adadad; 
+  }
+
   /* Rounded sliders */
   .slider.round {
     border-radius: 10px;
@@ -65,6 +74,6 @@
 </style>
 
 <label class="switch" style="--switch-background-color:{color}; --switch-button-color:{buttonColor}">
-  <input type="checkbox" {active}/>
+  <input type="checkbox" checked={on} disabled={disabled}/>
   <div class="slider round" />
 </label>
