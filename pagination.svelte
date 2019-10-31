@@ -1,4 +1,7 @@
 <script>
+import { createEventDispatcher } from 'svelte';
+const dispatch = createEventDispatcher();
+
 export let color = '#624695';
 export let total = 20;
 export let displayRows = 10;
@@ -6,12 +9,14 @@ export let active = 1;
 let previous = "<";
 let next = '>';
 let bgActive = `background-color: ${color};`;
+let el;
+let pager;
 
 const isActive = (index) => {
    return  parseInt(active) === index;
 };
 
-let paper;
+
 const getPager = (totalItems, currentPage, pageSize) => {
 
     let startPage, endPage;
@@ -33,7 +38,7 @@ const getPager = (totalItems, currentPage, pageSize) => {
         }
     }
     const pages = [...Array((endPage + 1) - startPage).keys()].map(i => startPage + i);
-     paper = {
+     pager = {
         currentPage: currentPage,
         totalPages: totalPages,
         endPage: endPage,
@@ -46,20 +51,30 @@ const getPager = (totalItems, currentPage, pageSize) => {
 
  const isFirstAndLast = (currentPage, index) => {
      return {
-             first: (paper.totalPages > 10) && (paper.endPage  > 10) && (index === 0),
-             last: (paper.totalPages > 10) && (paper.totalPages > currentPage) && (index === 9)
+             first: (pager.totalPages > 10) && (pager.endPage  > 10) && (index === 0),
+             last: (pager.totalPages > 10) && (pager.totalPages > currentPage) && (index === 9)
          };
  };
 
  const setPage = (currentPage, index) => {
     const values = isFirstAndLast(currentPage, index);
+
     if(values.last){
-      active = paper.totalPages;
+      active = pager.totalPages;
     } else if(values.first) {
         active = 1;
     } else {
         active = currentPage
     }
+
+    const event = new CustomEvent("change", {
+          detail: {current:active},
+          bubbles: true,
+          cancelable: true,
+          composed: true // makes the event jump shadow DOM boundary
+        });
+    el.dispatchEvent(event);
+    dispatch("change", {current:active});
     getPager(total, active, displayRows);
  };
 
@@ -69,7 +84,7 @@ const getPager = (totalItems, currentPage, pageSize) => {
      if(values.first){
       numPage = '1...';
      } else if(values.last) {
-      numPage = "..."+paper.totalPages;
+      numPage = "..."+pager.totalPages;
      } else {
          numPage = item;
      }
@@ -79,15 +94,6 @@ const getPager = (totalItems, currentPage, pageSize) => {
 
 <style>
 
-.container{
-width: auto;
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-}
-
-
 ul {
 
 padding-left: 0px;
@@ -96,9 +102,9 @@ flex-direction: row;
 align-items: center;
 text-align: center;
 width: auto;
-display: inline-flex;
 cursor: pointer;
-
+display: flex;
+justify-content: center;
 }
 
 .item {
@@ -160,26 +166,26 @@ justify-content: center;
 
 </style>
 
-<div class="container">
-<ul>
+
+<ul class="container" bind:this={el}>
 {#if active > 1}
   <li on:click={() => setPage(active -1)} class="link"><a href={null}>{previous}</a></li>
 {/if}
 
-{#each paper.pages as n, index}
-  <li on:click={() => setPage(n,index)} class="item"><a data-index={n}
-  class="{isActive(n) && 'active'}"
+{#each pager.pages as n, index}
+  <li on:click={() => setPage(n,index)} class="item">
+  <a data-index={n} class="{isActive(n) && 'active'}"
   style="{isActive(n) && bgActive}"
   href={null}>{showPage(n, index)}
  </a>
  </li>
 {/each}
 
-{#if paper.totalPages  !== active }
+{#if pager.totalPages  !== active }
   <li on:click={() => setPage(active + 1)} class="link"><a href={null}> {next} </a></li>
 {/if}
 
 </ul>
-</div>
+
 
 
