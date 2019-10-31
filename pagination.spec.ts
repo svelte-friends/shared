@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom/extend-expect';
 import 'jest';
-import { render, cleanup } from '@testing-library/svelte';
+import { render, cleanup, fireEvent } from '@testing-library/svelte';
 import Pagination from './pagination.svelte';
 
 describe("Pagination Test Suite", () => {
@@ -71,6 +71,16 @@ describe("Pagination Test Suite", () => {
         const { getByText } =  render(Pagination, {props: {total, displayRows }});
         const text = getByText(pages.toString());
         expect(text).toBeDefined();
+    });
+
+
+    it("If you click on a number, skip to the corresponding records", async () => {
+
+        const { getByText } =  render(Pagination, {props: {total: 20, displayRows: 1 }});
+        const item = getByText("2");
+        await fireEvent.click(item);
+        const index = +item.getAttribute("data-index");
+        expect(index).toBe(2);
     });
 
     afterEach(() => {
