@@ -63,6 +63,16 @@ describe("Pagination Test Suite", () => {
         expect(length).toBe(10);
     });
 
+
+    it("Can receive the total number of records.", () => {
+        const total = 100;
+        const displayRows = 2;
+        const pages = Math.ceil(total / displayRows);
+        const { getByText } =  render(Pagination, {props: {total, displayRows }});
+        const text = getByText(pages.toString());
+        expect(text).toBeDefined();
+    });
+
     afterEach(() => {
         cleanup();
     });
