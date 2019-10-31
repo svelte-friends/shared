@@ -2,6 +2,7 @@
 
   export let active = false;
   export let color = "#b1d660"
+  export let buttonColor = "#e0fe9f"
 
 </script>
 
@@ -46,7 +47,7 @@
   }
 
   input:checked + .slider::before {
-    background-color: #e0fe9f;
+    background-color: var(--switch-button-color);
   }
 
   input:checked + .slider:before {
@@ -63,7 +64,7 @@
   }
 </style>
 
-<label class="switch" style="--switch-background-color:{color}">
+<label class="switch" style="--switch-background-color:{color}; --switch-button-color:{buttonColor}">
   <input type="checkbox" {active}/>
   <div class="slider round" />
 </label>
