@@ -4,6 +4,7 @@ export let total = 20;
 export let displayRows = 10;
 export let active = 1;
 let previous = "<";
+let next = '>';
 let bgActive = `background-color: ${color};`;
 
 const isActive = (index) => {
@@ -14,7 +15,7 @@ let paper;
 const getPager = (totalItems, currentPage, pageSize) => {
 
     let startPage, endPage;
-    const  totalPages = Math.ceil(totalItems / pageSize)
+    const  totalPages = Math.ceil(totalItems / pageSize);
 
     if (totalPages <= 10) {
         startPage = 1;
@@ -31,38 +32,48 @@ const getPager = (totalItems, currentPage, pageSize) => {
             endPage = currentPage + 4;
         }
     }
-
     const pages = [...Array((endPage + 1) - startPage).keys()].map(i => startPage + i);
      paper = {
-        totalItems: totalItems,
         currentPage: currentPage,
-        pageSize: pageSize,
         totalPages: totalPages,
-        startPage: startPage,
         endPage: endPage,
         pages: pages
     };
-  };
+   };
 
  getPager(total, active, displayRows);
 
- const showPage = (item, index) => {
 
-     if(paper.totalPages >=10 && paper.currentPage >=10 && index === 0){
-         return "1..."
+ const isFirstAndLast = (currentPage, index) => {
+     return {
+             first: (paper.totalPages > 10) && (paper.endPage  > 10) && (index === 0),
+             last: (paper.totalPages > 10) && (paper.totalPages > currentPage) && (index === 9)
+         };
+ };
+
+ const setPage = (currentPage, index) => {
+    const values = isFirstAndLast(currentPage, index);
+    if(values.last){
+      active = paper.totalPages;
+    } else if(values.first) {
+        active = 1;
+    } else {
+        active = currentPage
+    }
+    getPager(total, active, displayRows);
+ };
+
+ const showPage = (item, index) => {
+     const values = isFirstAndLast(item, index);
+     let numPage;
+     if(values.first){
+      numPage = '1...';
+     } else if(values.last) {
+      numPage = "..."+paper.totalPages;
      } else {
-         if(paper.totalPages >=10 && index === 9){
-              return paper.totalPages;
-         } else {
-             if(active === paper.totalPages){
-                 return item;
-             } else if(paper.totalPages > 10 && index === 8) {
-                return item+ '...';
-             } else {
-                 return item;
-             }
-         }
+         numPage = item;
      }
+     return numPage;
  }
 </script>
 
@@ -86,6 +97,7 @@ align-items: center;
 text-align: center;
 width: auto;
 display: inline-flex;
+cursor: pointer;
 
 }
 
@@ -151,20 +163,20 @@ justify-content: center;
 <div class="container">
 <ul>
 {#if active > 1}
-  <li class="link"><a href="#">{previous}</a></li>
+  <li on:click={() => setPage(active -1)} class="link"><a href={null}>{previous}</a></li>
 {/if}
 
 {#each paper.pages as n, index}
-  <li class="item"><a data-index={n}
+  <li on:click={() => setPage(n,index)} class="item"><a data-index={n}
   class="{isActive(n) && 'active'}"
   style="{isActive(n) && bgActive}"
-  href="#">{showPage(n, index)}
+  href={null}>{showPage(n, index)}
  </a>
  </li>
 {/each}
 
 {#if paper.totalPages  !== active }
-  <li class="link"><a href="#"> > </a></li>
+  <li on:click={() => setPage(active + 1)} class="link"><a href={null}> {next} </a></li>
 {/if}
 
 </ul>
