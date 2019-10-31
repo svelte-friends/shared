@@ -1,40 +1,19 @@
 <script>
-  import { onMount } from "svelte";
   export let label = "";
   export let checked = false;
   export let color = "#624695";
-
-  let checkmark;
-
-  onMount(() => {
-    checkmark.style.backgroundColor = checked ? color : "#FFF";
-  });
-
-  function onMouseOver() {
-    checkmark.style.borderColor = color;
-    checkmark.style.boxShadow = "0 1px 5px 0 rgba(40, 39, 40, 0.3)";
-  }
-
-  function onMouseOut() {
-    checkmark.style.borderColor = "#CECECE";
-    checkmark.style.boxShadow = "none";
-  }
-
-  function onChange() {
-    checkmark.style.backgroundColor = this.checked ? color : "#FFF";
-  }
 </script>
 
 <style>
-  .container {
+  .checkbox {
     display: block;
     position: relative;
     cursor: pointer;
     user-select: none;
     padding-left: 20px;
     padding-top: 2px;
+    min-height: 18px;
   }
-
   input {
     position: absolute;
     opacity: 0;
@@ -42,8 +21,7 @@
     height: 0;
     width: 0;
   }
-
-  .checkmark {
+  .checkbox-checkmark {
     position: absolute;
     top: 0;
     left: 0;
@@ -53,23 +31,29 @@
     border: solid 2px #cecece;
   }
 
-  .checkmark:after {
+  .checkbox-checkmark:after {
     content: "";
     position: absolute;
     display: none;
   }
 
-  input:checked ~ .checkmark {
-    border: none;
+  .checkbox:hover input ~ .checkbox-checkmark {
+    border-color: var(--checkbox-border-color);
     box-shadow: 0 1px 5px 0 rgba(40, 39, 40, 0.3);
   }
 
-  input:checked ~ .checkmark:after {
+  input:checked ~ .checkbox-checkmark {
+    border: none;
+    background-color: var(--checkbox-border-color);
+    box-shadow: 0 1px 5px 0 rgba(40, 39, 40, 0.3);
+  }
+
+  input:checked ~ .checkbox-checkmark:after {
     display: block;
   }
 
-  .checkmark:after {
-    left: 5px;
+  .checkbox-checkmark:after {
+    left: 5.4px;
     top: 1px;
     width: 5px;
     height: 10px;
@@ -79,8 +63,8 @@
   }
 </style>
 
-<label class=container on:mouseover={onMouseOver} on:mouseout={onMouseOut}>
+<label class=checkbox style="--checkbox-border-color:{color}">
   {label}
-  <input on:change={onChange} type=checkbox bind:checked value={label} />
-  <span class=checkmark bind:this={checkmark} />
+  <input type=checkbox bind:checked value={label} on:change />
+  <span class=checkbox-checkmark />
 </label>
