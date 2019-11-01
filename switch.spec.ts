@@ -14,6 +14,43 @@ describe("Switch Test Suite", () => {
         await fireEvent.click(component);
         expect(component).not.toBeChecked();
     });
+
+    it("Must be able to receive disabled state", () => {
+        const { getByLabelText } = render(Switch, {
+            props: {
+                disabled:true
+            }
+        });
+        const component = getByLabelText("");
+        expect(component).not.toBeEnabled();
+    });
+
+    it("If the component is disabled, clicking should not change state", () => {
+        const { getByLabelText } = render(Switch, {
+            props: {
+                disabled:true
+            }
+        });
+        const component = getByLabelText("");
+        component.click();
+        expect(component).not.toBeChecked();
+    }); 
+
+    it("Render component with status 'disabled' and 'on'", () => {
+        const { getByLabelText } = render(Switch, {
+            props:{
+                disabled:true,
+                on:true
+            }
+        })
+        const component = getByLabelText ("");
+        expect(component).toBeChecked();
+        expect(component).toBeDisabled();
+        component.click();
+        expect(component).toBeDisabled();
+        expect(component).toBeChecked();
+    })
+
     afterEach(() => {
         cleanup();
     });
