@@ -1,12 +1,10 @@
 <script>
-  import { onMount } from "svelte";
   export let number = "";
   export let colorText = "#000";
   export let colorBadge = "#624695";
   export let textBadgeColor = "white";
   export let text = "Texto";
   export let size = "default"; // small
-
 
   let badgeClass = "";
   if (number === "") {
@@ -17,6 +15,7 @@
   if (number.length > 1) badgeClass = "badgeMore";
   if (number > 99) number = "99+";
 </script>
+
 <style>
   .textLabel {
     font-family: var(--text-font-family);
