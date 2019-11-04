@@ -1,33 +1,35 @@
 <script>
-
-export let backgroundColor = "linear-gradient(268deg, #624695, #e1364a)";
+  export let backgroundColor = "linear-gradient(268deg, #624695, #e1364a)";
+  export let medium = false;
+  export let big = false;
 
 </script>
 
 <style>
-  .content {
-      width: 100%;
-  }
-
-  .progressDefault {
-    width: 272px;
+  .progress {
+    width: 100%;
     height: 5px;
     object-fit: contain;
     border-radius: 10px;
     background-color: #ebebeb;
   }
 
-  .progress-barDefault {
-    width: 136px;
-    height: 5px;
+  .progress-indicator {
+    width: 50%;
+    height: 100%;
     border-radius: 10px;
   }
+
+  .medium {
+      height: 10px;
+  }
+
+    .big {
+    height: 15px;
+  }
+
 </style>
 
-<div class="content">
-  <div class="progressDefault" >
-  <div class="progress-barDefault"
-    style={`background: ${backgroundColor}`}>  
-   </div>
-  </div>
+<div class="progress" class:medium class:big>
+  <div class="progress-indicator" style={`background: ${backgroundColor}`} />
 </div>
