@@ -1,6 +1,7 @@
 <script>
   export let text;
   export let header;
+  export let color = "";
 </script>
 
 <style>
@@ -28,7 +29,7 @@
   }
 </style>
 
-<div class="list-item">
+<div class="list-item" style="background-color: {color}">
   {#if header} <div class="list-item-header">{header}</div>{/if}
   {#if text} <div class="list-item-text">{text}</div>{/if}
 </div>

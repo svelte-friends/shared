@@ -25,6 +25,18 @@ describe("ListItem Teste Suite", () => {
     expect(header).toHaveTextContent("Leandro Amaral");
   });
 
+  it("ListItem card can receive a color property to set in background", () => {
+    const color = "#00c853";
+    const { getByText } = render(ListItem, { 
+      props: {
+        color,
+        text: "Some cool text"
+      }
+    });
+    const component = getByText("Some cool text");
+    expect(component.parentElement).toHaveStyle(`background-color: ${color}`);
+  });
+
   afterEach(() => {
     cleanup();
   });
