@@ -16,9 +16,9 @@
 
   .list-item-header {
     font-size: 14px;
+    line-height: normal;
     letter-spacing: 0.75px;
     font-weight: 500;
-    margin-bottom: 2px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -33,13 +33,14 @@
 
   .list-item-text {
     font-size: 14px;
+    line-height: normal;
     letter-spacing: 0.25px;
     font-weight: 400;
-    margin-top: 2px;
   }
 </style>
 
 <div class="list-item" style="background-color: {color}">
+  <slot name="left" />
   <div class="list-item-center">
     {#if header}
       <div class="list-item-header">{header}</div>
