@@ -4,7 +4,7 @@ const dispatch = createEventDispatcher();
 
 export let color = '#624695';
 export let total = 20;
-export let displayRows = 1;
+export let displayRows = 2;
 export let active = 1;
 let previous = "<";
 let next = '>';
@@ -18,7 +18,6 @@ const classInline =  (index)=>{
 const styleInline = (index)=>{
      return  parseInt(active) === index ? 'color:white' : '';
 };
-
 
 const getPager = (totalItems, currentPage, pageSize) => {
 
@@ -105,12 +104,12 @@ flex-direction: row;
 align-items: center;
 text-align: center;
 width: auto;
-cursor: pointer;
 display: flex;
 justify-content: center;
 }
 
 .item {
+  cursor: pointer;
   width: 30px;
   height: 30px;
   font-size: 14px;
@@ -126,7 +125,8 @@ justify-content: center;
   text-decoration: none;
 }
 
-span {
+
+.animation {
     border-radius: 10px;
     transform: scale(0);
     transition: transform 0.3s;
@@ -144,21 +144,7 @@ span {
   transform: scale(1);
 }
 
-.first {
-  margin-left: 10px;
-  border-top-left-radius: 15px;
-  border-bottom-left-radius: 15px;
-  width: 40px;
-}
-
-.last{
- margin-right: 10px;
- border-top-right-radius: 15px;
- border-bottom-right-radius: 15px;
- width: 40px;
-}
-
-a {
+span {
   text-decoration: none;
   text-align: center;
   color: #8c8c8c;
@@ -174,29 +160,57 @@ border-radius: 15px;
 display: flex;
 align-items: center;
 justify-content: center;
+cursor: pointer;
 
+}
+
+.hidden{
+ visibility: hidden;
+ cursor: none;
+}
+
+.link:first-child{
+ margin-right: 10px;
+}
+
+.link:last-child{
+ margin-left: 10px;
+}
+
+
+.item:nth-child(2){
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
+.item:nth-last-child(2){
+ border-top-right-radius: 15px;
+ border-bottom-right-radius: 15px;
 }
 
 </style>
 
 
 <ul class="container" bind:this={el}>
-{#if active > 1}
-  <li on:click={() => setPage(active -1)} class="link"><a href={null}>{previous}</a></li>
-{/if}
+  <li class:hidden={active === 1}
+   on:click={() => setPage(active -1)} class="link">
+   <span>{previous}</span>
+  </li>
 
 {#each pager.pages as n, index}
   <li on:click={() => setPage(n,index)} class="item">
   <span  data-index={n}
      style="background-color:{color}"
-     class="{classInline(n)}"></span>
-    <a style="{styleInline(n)}"  href={null}>{showPage(n, index)}</a>
+     class="animation {classInline(n)}"></span>
+    <span style="{styleInline(n)}">{showPage(n, index)}</span>
  </li>
 {/each}
 
-{#if pager.totalPages  !== active }
-  <li on:click={() => setPage(active + 1)} class="link"><a href={null}> {next} </a></li>
-{/if}
+  <li class:hidden={pager.totalPages === active}
+  on:click={() => setPage(active + 1)}
+  class="link">
+  <span> {next} </span>
+  </li>
 
 </ul>
 
