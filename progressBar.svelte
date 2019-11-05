@@ -1,7 +1,18 @@
 <script>
+import { beforeUpdate } from "svelte";
   export let backgroundColor = "linear-gradient(268deg, #624695, #e1364a)";
   export let medium = false;
   export let big = false;
+  export let percente = 0;
+  
+  beforeUpdate(() => {
+    if (percente > 100) {
+      percente = 100;
+    }
+    if (percente < 0) {
+      percente = 0;
+    }
+  });
 
 </script>
 
@@ -15,21 +26,21 @@
   }
 
   .progress-indicator {
-    width: 50%;
     height: 100%;
     border-radius: 10px;
   }
 
   .medium {
-      height: 10px;
+    height: 10px;
   }
 
-    .big {
+  .big {
     height: 15px;
   }
-
 </style>
 
 <div class="progress" class:medium class:big>
-  <div class="progress-indicator" style={`background: ${backgroundColor}`} />
+  <div
+    class="progress-indicator"
+    style={`background: ${backgroundColor}; width:${percente}%`} />
 </div>
