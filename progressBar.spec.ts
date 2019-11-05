@@ -14,31 +14,60 @@ describe("ProgressBar Test Suite", () => {
 
     it("It should be possible to receive a color for progress Bar: background Color", () => {
         const container = document.body;
-        render(ProgressBar, { 
-            props: { 
-                backgroundColor: "red" } 
-            });
+        render(ProgressBar, {
+            props: {
+                backgroundColor: "red"
+            }
+        });
         const progressElement = container.querySelector(".progress-indicator");
         expect(progressElement).toHaveStyle("background:red");
     });
 
     it("It should have 3 sizes: default, medium and big", () => {
         const container = document.body;
-        render(ProgressBar, { props: { 
-            medium: "true"
-        }});
-        render(ProgressBar, { props:{
-            big:"true"
-        }});
+        render(ProgressBar, {
+            props: {
+                medium: "true"
+            }
+        });
+        render(ProgressBar, {
+            props: {
+                big: "true"
+            }
+        });
 
         const progressMedium = container.querySelector(".medium");
         const progressBig = container.querySelector(".big")
-        
+
         expect(progressMedium).toHaveClass("medium");
         expect(progressBig).toHaveClass("big");
+    });
 
-    })
-   
+
+    it("Progress value will be between 0 and 100: Example greater than 100", () => {
+        const container = document.body;
+        render(ProgressBar, {
+            props: {
+                percente: "101"
+            }
+        });
+        const progressElement = container.querySelector(".progress-indicator");
+        const widthProgress = getComputedStyle(progressElement).getPropertyValue("width");
+        expect(widthProgress).toBe("100%");
+    });
+
+    it("Progress value will be between 0 and 100: example less than 0", () => {
+        const container = document.body;
+        render(ProgressBar, {
+            props: {
+                percente: "-1"
+            }
+        });
+        const progressElement = container.querySelector(".progress-indicator");
+        const widthProgress = getComputedStyle(progressElement).getPropertyValue("width");
+        expect(widthProgress).toBe("0%");
+    });
+
     afterEach(() => {
         cleanup();
     });
