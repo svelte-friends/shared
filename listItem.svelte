@@ -7,8 +7,8 @@
 <style>
   .list-item {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
     padding: 15px;
     min-height: 50px;
     width: 100%;
@@ -26,6 +26,11 @@
     -webkit-box-orient: vertical;
   }
 
+  .list-item-center {
+    width: 100%;
+    margin: 0 10px;
+  }
+
   .list-item-text {
     font-size: 14px;
     letter-spacing: 0.25px;
@@ -35,6 +40,13 @@
 </style>
 
 <div class="list-item" style="background-color: {color}">
-  {#if header} <div class="list-item-header">{header}</div>{/if}
-  {#if text} <div class="list-item-text">{text}</div>{/if}
+  <div class="list-item-center">
+    {#if header}
+      <div class="list-item-header">{header}</div>
+    {/if}
+    {#if text}
+      <div class="list-item-text">{text}</div>
+    {/if}
+  </div>
+  <slot name="right" />
 </div>
