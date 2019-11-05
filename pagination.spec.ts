@@ -44,7 +44,7 @@ describe("Pagination Test Suite", () => {
         const container = document.body;
         render(Pagination, {props: {active: 1}});
         const item = container.querySelector("ul").firstElementChild;
-        expect(item.classList.contains("item")).toBe(true);
+        expect(item).toHaveClass("hidden");
     });
 
 
@@ -52,7 +52,7 @@ describe("Pagination Test Suite", () => {
         const container = document.body;
         render(Pagination, {props: {total: 100, active: 100, displayRows: 1}});
         const item = container.querySelector("ul").lastElementChild;
-        expect(item.classList.contains("item")).toBe(true);
+        expect(item).toHaveClass("hidden");
     });
 
 
