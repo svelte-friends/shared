@@ -4,16 +4,19 @@ const dispatch = createEventDispatcher();
 
 export let color = '#624695';
 export let total = 20;
-export let displayRows = 10;
+export let displayRows = 1;
 export let active = 1;
 let previous = "<";
 let next = '>';
-let bgActive = `background-color: ${color};`;
 let el;
 let pager;
 
-const isActive = (index) => {
-   return  parseInt(active) === index;
+const classInline =  (index)=>{
+  return  parseInt(active) === index ? 'active' : '';
+};
+
+const styleInline = (index)=>{
+     return  parseInt(active) === index ? 'color:white' : '';
 };
 
 
@@ -123,13 +126,22 @@ justify-content: center;
   text-decoration: none;
 }
 
+span {
+    border-radius: 10px;
+    transform: scale(0);
+    transition: transform 0.3s;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+}
+
 .active {
   width: 30px;
   height: 30px;
   border-radius: 10px;
   box-shadow: 0 1px 2px 0 rgba(40, 39, 40, 0.3);
-  color:white;
   padding-top: 6px;
+  transform: scale(1);
 }
 
 .first {
@@ -150,6 +162,7 @@ a {
   text-decoration: none;
   text-align: center;
   color: #8c8c8c;
+  z-index: 2;
 }
 
 .link{
@@ -174,10 +187,10 @@ justify-content: center;
 
 {#each pager.pages as n, index}
   <li on:click={() => setPage(n,index)} class="item">
-  <a data-index={n} class="{isActive(n) && 'active'}"
-  style="{isActive(n) && bgActive}"
-  href={null}>{showPage(n, index)}
- </a>
+  <span  data-index={n}
+     style="background-color:{color}"
+     class="{classInline(n)}"></span>
+    <a style="{styleInline(n)}"  href={null}>{showPage(n, index)}</a>
  </li>
 {/each}
 
