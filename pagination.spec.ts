@@ -75,8 +75,9 @@ describe("Pagination Test Suite", () => {
 
 
     it("If you click on a number, skip to the corresponding records", async () => {
-        const { getByText } =  render(Pagination, {props: {total: 20, displayRows: 1 }});
-        const item = getByText("2");
+        const container = document.body;
+        render(Pagination, {props: {total: 20, displayRows: 1 }});
+        const item = container.querySelector("li span[data-index='2']") as  HTMLUListElement;
         await fireEvent.click(item);
         const index = +item.getAttribute("data-index");
         expect(item).toHaveClass("active");
@@ -89,7 +90,7 @@ describe("Pagination Test Suite", () => {
         const container = document.body;
         render(Pagination, {props: {total: 20, displayRows: 5 }});
         const root = container.querySelector(".container") as  HTMLUListElement;
-        const pagination = container.querySelector("li a[data-index='2']") as  HTMLUListElement;
+        const pagination = container.querySelector("li span[data-index='2']") as  HTMLUListElement;
         expect(root).toBeDefined();
         expect(pagination).toBeDefined();
 
