@@ -27,6 +27,13 @@ describe("Dropdown Test Suite", () => {
 
     });
 
+    it("Can receive text color", () => {
+        const container = document.body;
+        render(Dropdown, {props: {color_text: "blue"}});
+        const select = container.querySelector("select");
+        expect(select).toHaveStyle("color:blue");
+    });
+
     afterEach(() => {
         cleanup();
     });
