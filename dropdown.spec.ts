@@ -34,6 +34,16 @@ describe("Dropdown Test Suite", () => {
         expect(select).toHaveStyle("color:blue");
     });
 
+
+    it("If no text color or background color is passed, assume the default value", () => {
+        const container = document.body;
+        render(Dropdown);
+        const select = container.querySelector("select");
+        expect(select).toHaveStyle("color:white");
+        expect(select).toHaveStyle("background-color:#624695");
+    });
+
+
     afterEach(() => {
         cleanup();
     });
