@@ -48,7 +48,7 @@ describe("ProgressBar Test Suite", () => {
         const container = document.body;
         render(ProgressBar, {
             props: {
-                percente: "101"
+                value: "101"
             }
         });
         const progressElement = container.querySelector(".progress-indicator");
@@ -60,13 +60,29 @@ describe("ProgressBar Test Suite", () => {
         const container = document.body;
         render(ProgressBar, {
             props: {
-                percente: "-1"
+                value: "-1"
             }
         });
         const progressElement = container.querySelector(".progress-indicator");
         const widthProgress = getComputedStyle(progressElement).getPropertyValue("width");
         expect(widthProgress).toBe("0%");
     });
+
+    it("Must have 2 types, default and indeterminate: example with indeterminate", () => {
+        const container  = document.body;
+        render(ProgressBar, {
+            props: { indeterminate: true }
+        });
+        const progressIndeterminate = container.querySelector(".indeterminate");
+        expect(progressIndeterminate).toHaveClass("indeterminate");
+    })
+
+    it("Must have 2 types, default and indeterminate: example with default", () => {
+        const container = document.body;
+        render(ProgressBar);
+        const progressDefault = container.querySelector(".progress-indicator");
+        expect(progressDefault).not.toHaveClass("indeterminate")
+    })
 
     afterEach(() => {
         cleanup();

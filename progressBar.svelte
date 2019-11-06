@@ -1,16 +1,17 @@
 <script>
-import { beforeUpdate } from "svelte";
+  import { beforeUpdate } from "svelte";
   export let backgroundColor = "linear-gradient(268deg, #624695, #e1364a)";
   export let medium = false;
   export let big = false;
-  export let percente = 0;
-  
+  export let value = 0;
+  export let indeterminate = false;
+
   beforeUpdate(() => {
-    if (percente > 100) {
-      percente = 100;
+    if (value > 100) {
+      value = 100;
     }
-    if (percente < 0) {
-      percente = 0;
+    if (value < 0) {
+      value = 0;
     }
   });
 
@@ -25,6 +26,12 @@ import { beforeUpdate } from "svelte";
     background-color: #ebebeb;
   }
 
+  .indeterminate {
+    width: 20%;
+    animation: ping 1s linear infinite alternate;
+
+  }
+
   .progress-indicator {
     height: 100%;
     border-radius: 10px;
@@ -37,10 +44,27 @@ import { beforeUpdate } from "svelte";
   .big {
     height: 15px;
   }
+
+  @keyframes ping {
+    to {
+      margin-left: 0;
+    }
+    from {
+
+      margin-left: 80%;
+    }
+  }
+
 </style>
 
 <div class="progress" class:medium class:big>
-  <div
-    class="progress-indicator"
-    style={`background: ${backgroundColor}; width:${percente}%`} />
+  {#if indeterminate}
+    <div
+      class="progress-indicator indeterminate"
+      style={` background: ${backgroundColor}`} />
+  {:else}
+    <div
+      class="progress-indicator"
+      style={`background: ${backgroundColor}; width:${value}%`} />
+  {/if}
 </div>
