@@ -13,6 +13,20 @@ describe("Dropdown Test Suite", () => {
 
     });
 
+    it("Dropdown can receive options", () => {
+
+        let list = [
+            { value: '1', name: 'Option 1' },
+            { value: '2', name: 'Option 2' },
+        ];
+
+        const container = document.body;
+        render(Dropdown, {props: {options:list}});
+        const select = container.querySelector("select");
+        expect(select.childElementCount).toBe(list.length);
+
+    });
+
     afterEach(() => {
         cleanup();
     });
