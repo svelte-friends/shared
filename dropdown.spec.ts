@@ -39,8 +39,8 @@ describe("Dropdown Test Suite", () => {
         const container = document.body;
         render(Dropdown);
         const select = container.querySelector("select");
-        expect(select).toHaveStyle("color:white");
-        expect(select).toHaveStyle("background-color:#624695");
+        expect(select).toHaveStyle("color:#0b0e1e");
+        expect(select).toHaveStyle("background-white:");
     });
 
 
