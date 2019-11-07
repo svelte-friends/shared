@@ -1,12 +1,14 @@
 <script>
-export let color = '#624695';
-export let color_text = "white";
+export let color = 'white';
+export let color_text = "#0b0e1e";
 export let options = [
-		{ value: '1', name: 'Option 1' },
-		{ value: '2', name: 'Option 2' },
+
+		{ value: 1, name: 'Option 1' },
+		{ value: 2, name: 'Option 2' },
 	];
 
 let styleInline  = `color: ${color_text}; background-color: ${color};`;
+let selected = 2;
 </script>
 
 <style>
@@ -19,17 +21,20 @@ let styleInline  = `color: ${color_text}; background-color: ${color};`;
 select {
       width: 100%;
       height:48px;
-      font-size:18px;
       padding:13px 20px 13px 12px;
-      color:#fff;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.75px;
+      border: none;
 }
+
 </style>
 
 
 <div class="container">
-<select style={styleInline}>
+<select  bind:value={selected} style={styleInline}>
 {#each options as option}
-<option value={option.value}>{option.name}</option>
+<option class="option" value={option.value} selected={selected === option.value}>{option.name}</option>
 {/each}
 </select>
 </div>
