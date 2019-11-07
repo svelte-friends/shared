@@ -1,4 +1,6 @@
 <script>
+import { createEventDispatcher } from 'svelte';
+const dispatch = createEventDispatcher();
 export let color = 'white';
 export let color_text = "#0b0e1e";
 export let options = [
@@ -9,6 +11,12 @@ export let options = [
 
 let styleInline  = `color: ${color_text}; background-color: ${color};`;
 let selected = 2;
+
+
+function isSelected (){
+    dispatch("change", {selected});
+}
+
 </script>
 
 <style>
@@ -32,7 +40,7 @@ select {
 
 
 <div class="container">
-<select  bind:value={selected} style={styleInline}>
+<select on:change={isSelected}  bind:value={selected} style={styleInline}>
 {#each options as option}
 <option class="option" value={option.value} selected={selected === option.value}>{option.name}</option>
 {/each}
