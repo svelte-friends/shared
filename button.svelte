@@ -1,66 +1,77 @@
 <script>
+  export let text = 'Sample';
+  export let color = '#624695';
+  export let hover = '#3f2371';
+  export let active = '#26124a';
 
-export let text = 'text button';
-export let color = "#624695";
-export let size = "medium";
-export let type = "default";
-export let hover = "#3f2371";
-export let active = "#26124a";
+  export let small = false;
+  export let big = false;
 
-let isSimple = type === "simple";
-let inline = isSimple ? `color: ${color}; border-color: ${color};`:'';
-let bgInitial = isSimple ? 'transparent': color;
-let bg = bgInitial;
-
+  export let pill = false;
+  export let outline = false;
 </script>
 
 <style>
   .btn {
-   text-align: center;
-   vertical-align: middle;
-   user-select: none;
-   box-shadow: 0 0 7px 0 rgba(40, 39, 40, 0.25);
-   color: white;
-   border:none;
-   font-size: 14px;
-   font-weight: 600;
-   letter-spacing: 0.5px;
-  }
-
-  .btn-small {
-    height: 28px;
-    width: 100px;
-  }
-
-  .btn-medium {
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    color: white;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background-color: var(--btn-color);
+    box-shadow: 0 0 7px 0 rgba(40, 39, 40, 0.25);
     height: 38px;
     width: 100px;
+    border-radius: 5px;
   }
 
-  .btn-large {
-   height: 48px;
-   width: 140px;
+  .btn:hover {
+    background-color: var(--btn-hover-color);
   }
 
-  .btn-round {
+  .btn:active {
+    background-color: var(--btn-active-color);
+  }
+
+  .small {
+    height: 28px;
+  }
+  .big {
+    height: 48px;
+    width: 140px;
+  }
+
+  .pill {
     border-radius: 24px;
   }
 
-  .btn-default{
-     border-radius: 5px;
+  .outline {
+    background-color: transparent;
+    border: 2px solid;
+    color: var(--btn-color);
   }
-
-  .btn-simple {
-   border: 2px solid;
-   border-radius: 5px;
+  .outline:hover {
+    background-color: transparent;
+    border-color: var(--btn-hover-color);
+    color: var(--btn-hover-color);
   }
-
+  .outline:active {
+    background-color: transparent;
+    border-color: var(--btn-active-color);
+    color: var(--btn-active-color);
+  }
 </style>
 
-<button on:mouseover={() => bg = hover}
-        on:mouseout={() => bg = bgInitial}
-        on:mousedown={() => bg = active}
-        on:mouseup={() => bg = bgInitial}
-        class="btn btn-{size} btn-{type}"
-        style="background-color:{bg}; {inline}">{text}
+<button
+  class="btn"
+  class:small
+  class:big
+  class:pill
+  class:outline
+  on:click
+  style="--btn-color:{color}; --btn-hover-color:{hover}; --btn-active-color:{active}">
+  {text}
 </button>
