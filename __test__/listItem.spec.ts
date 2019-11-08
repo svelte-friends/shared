@@ -1,7 +1,7 @@
 import 'jest';
 import '@testing-library/jest-dom/extend-expect';
 import { render, cleanup } from '@testing-library/svelte';
-import ListItem from './listItem.svelte';
+import ListItem from '../listItem.svelte';
 
 describe('ListItem Teste Suite', () => {
   it('ListItem can receive a text property', () => {

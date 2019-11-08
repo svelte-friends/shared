@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/extend-expect';
 import 'jest';
 import { render, cleanup } from '@testing-library/svelte';
-import DotLabel from './dotLabel.svelte';
+import DotLabel from '../dotLabel.svelte';
 
 describe('DotLabel Test Suite', () => {
   it('It should be possible to receive a color for the text:colorText', () => {

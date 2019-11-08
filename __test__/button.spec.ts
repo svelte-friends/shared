@@ -2,7 +2,7 @@ import '@testing-library/jest-dom/extend-expect';
 import 'jest';
 import { render, cleanup } from '@testing-library/svelte';
 import { getByText, fireEvent } from '@testing-library/dom';
-import Button from './button.svelte';
+import Button from '../button.svelte';
 
 describe('Button Test Suite', () => {
   it('The button should use 3 sizes: small, medium and large.', () => {

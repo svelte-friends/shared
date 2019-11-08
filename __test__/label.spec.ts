@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/extend-expect';
 import 'jest';
 import { render, cleanup } from '@testing-library/svelte';
-import Label from './label.svelte';
+import Label from '../label.svelte';
 
 describe('Label Test Suite', () => {
   it('It must be possible to pass the label text in a name property: text', () => {

@@ -1,6 +1,6 @@
 import 'jest';
 import '@testing-library/jest-dom/extend-expect';
-import RadioButton from './radioButton.svelte';
+import RadioButton from '../radioButton.svelte';
 import { render, cleanup, fireEvent } from '@testing-library/svelte';
 
 describe('RadioButton Test Suite', () => {

@@ -2,7 +2,7 @@ import 'jest';
 import '@testing-library/jest-dom/extend-expect';
 import { prettyDOM } from '@testing-library/dom';
 import { render, cleanup, fireEvent } from '@testing-library/svelte';
-import Switch from './switch.svelte';
+import Switch from '../switch.svelte';
 
 describe('Switch Test Suite', () => {
   it('Clicking the switch state changes to active or inactive', async () => {

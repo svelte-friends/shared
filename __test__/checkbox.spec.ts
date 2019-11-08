@@ -1,6 +1,6 @@
 import 'jest';
 import '@testing-library/jest-dom/extend-expect';
-import Checkbox from './checkbox.svelte';
+import Checkbox from '../checkbox.svelte';
 import { render, cleanup, fireEvent } from '@testing-library/svelte';
 
 describe('Checkbox Test Suite', () => {

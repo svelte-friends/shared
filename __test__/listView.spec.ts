@@ -1,7 +1,7 @@
 import 'jest';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/svelte';
-import ListView from './listView.svelte';
+import ListView from '../listView.svelte';
 
 describe('ListItem Teste Suite', () => {
   const list = [

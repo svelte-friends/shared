@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/extend-expect';
 import 'jest';
 import { render, cleanup } from '@testing-library/svelte';
-import ProgressBar from './progressBar.svelte';
+import ProgressBar from '../progressBar.svelte';
 
 describe('ProgressBar Test Suite', () => {
   it('By default the background color will be: linear-gradient (268deg, #624695, #e1364a);', () => {
