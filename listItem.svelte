@@ -1,7 +1,7 @@
 <script>
   export let text;
   export let header;
-  export let color = "";
+  export let color = '';
 </script>
 
 <style>

@@ -1,8 +1,8 @@
 <script>
-  export let text = "Sample";
-  export let color = "#624695";
-  export let hover = "#3f2371";
-  export let active = "#26124a";
+  export let text = 'Sample';
+  export let color = '#624695';
+  export let hover = '#3f2371';
+  export let active = '#26124a';
 
   export let small = false;
   export let big = false;
@@ -63,7 +63,6 @@
     border-color: var(--btn-active-color);
     color: var(--btn-active-color);
   }
-
 </style>
 
 <button

@@ -1,7 +1,7 @@
 <script>
-  import { onMount, afterUpdate } from "svelte";
-  export let color = "#624695";
-  export let label = "";
+  import { onMount, afterUpdate } from 'svelte';
+  export let color = '#624695';
+  export let label = '';
   export let name = undefined;
   export let checked = false;
   export let value = undefined;
@@ -44,12 +44,12 @@
   }
 </style>
 
-<label class=radio style="--radio-border-color:{color}">
+<label class="radio" style="--radio-border-color:{color}">
   {label}
   {#if value}
-    <input type=radio {name} {checked} on:change {value} />
+    <input type="radio" {name} {checked} on:change {value} />
   {:else}
-    <input type=radio {name} {checked} on:change />
+    <input type="radio" {name} {checked} on:change />
   {/if}
-  <span class=radio-checkmark />
+  <span class="radio-checkmark" />
 </label>

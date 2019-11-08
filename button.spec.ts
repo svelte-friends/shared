@@ -73,7 +73,7 @@ describe('Button Test Suite', () => {
   it('The default button must be at least 100px wide', () => {
     const { getByText } = render(Button, { props: { text: 'Click me!' } });
     const button = getByText('Click me!');
-    expect(button).toHaveStyle("width: 100px");
+    expect(button).toHaveStyle('width: 100px');
   });
 
   afterEach(() => {

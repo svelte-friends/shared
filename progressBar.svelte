@@ -1,6 +1,6 @@
 <script>
-  import { beforeUpdate } from "svelte";
-  export let backgroundColor = "linear-gradient(268deg, #624695, #e1364a)";
+  import { beforeUpdate } from 'svelte';
+  export let backgroundColor = 'linear-gradient(268deg, #624695, #e1364a)';
   export let medium = false;
   export let big = false;
   export let value = 0;
@@ -14,7 +14,6 @@
       value = 0;
     }
   });
-
 </script>
 
 <style>
@@ -29,7 +28,6 @@
   .indeterminate {
     width: 20%;
     animation: ping 1s linear infinite alternate;
-
   }
 
   .progress-indicator {
@@ -50,11 +48,9 @@
       margin-left: 0;
     }
     from {
-
       margin-left: 80%;
     }
   }
-
 </style>
 
 <div class="progress" class:medium class:big>

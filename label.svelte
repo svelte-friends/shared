@@ -1,11 +1,11 @@
 <script>
-  export let text = "Label";
-  export let color = "#624695";
-  export let type = "fill"; //fill or outline
+  export let text = 'Label';
+  export let color = '#624695';
+  export let type = 'fill'; //fill or outline
   let label;
 
   let inLine =
-    type === "outline"
+    type === 'outline'
       ? `background: transparent; color: ${color}; border: 1px solid ${color};`
       : `background-color: ${color};`;
 </script>

@@ -1,7 +1,7 @@
 <script>
-  export let label = "";
+  export let label = '';
   export let checked = false;
-  export let color = "#624695";
+  export let color = '#624695';
 </script>
 
 <style>
@@ -32,7 +32,7 @@
   }
 
   .checkbox-checkmark:after {
-    content: "";
+    content: '';
     position: absolute;
     display: none;
   }
@@ -63,8 +63,8 @@
   }
 </style>
 
-<label class=checkbox style="--checkbox-border-color:{color}">
+<label class="checkbox" style="--checkbox-border-color:{color}">
   {label}
-  <input type=checkbox bind:checked value={label} on:change />
-  <span class=checkbox-checkmark />
+  <input type="checkbox" bind:checked value={label} on:change />
+  <span class="checkbox-checkmark" />
 </label>
