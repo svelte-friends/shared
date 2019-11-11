@@ -1,9 +1,12 @@
 <script>
   export let placeholder;
-  export let color = '#000';
   export let placeholderColor = '#8c8c8c';
+  export let color = '#000';
   export let backgroundColor = '#fff';
   export let focusColor = '#000';
+  export let type = 'text';
+
+  type = /radio|checkbox|color/.test(type) ? 'text' : type;
 </script>
 
 <style>
@@ -48,11 +51,11 @@
   }
 </style>
 
-<div class="input-container" 
+<div class="input-container"
       style="--input-color:{color};
               --input-background-color:{backgroundColor};
               --input-placeholder-color: {placeholderColor};
               --input-focus-color: {focusColor}">
-  <input class="input" {placeholder}/>
+  <input class="input" {placeholder} {type} />
   <span class="input-bar"/>
 </div>
