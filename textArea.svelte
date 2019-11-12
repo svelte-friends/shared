@@ -1,7 +1,10 @@
 <script>
+
   export let placeholder;
   export let placeholderColor = '#8c8c8c';
   export let borderColor = '#1f1c24';
+  export let backgroundColor = 'transparent';
+
 </script>
 
 <style>
@@ -16,6 +19,7 @@
     letter-spacing: 0.25px;
     border: none;
     border-bottom: solid;
+    background-color: var(--textArea-background-color);
   }
 
   .textArea:focus {
@@ -31,4 +35,5 @@
   class="textArea"
   {placeholder}
     style="--placeholder-color: {placeholderColor}; 
-           --textArea-border-color: {borderColor};"/>
+           --textArea-border-color: {borderColor};
+           --textArea-background-color:{backgroundColor};"/>
