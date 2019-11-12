@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom/extend-expect';
 import 'jest';
 import { render, cleanup } from '@testing-library/svelte';
+import { getByText } from '@testing-library/dom';
 import ProgressRing from '../progressRing.svelte';
 
 describe('ProgressRing Test Suite', () => {
@@ -18,6 +19,17 @@ describe('ProgressRing Test Suite', () => {
     expect(progressDefault).not.toHaveClass('big');
     expect(progressSmall).toHaveClass('small');
     expect(progressBig).toHaveClass('big');
+  });
+
+  it('Text definition (Text default loading)', () => {
+    const container = document.body;
+    render(ProgressRing);
+    render(ProgressRing, { props: { text: 'loading one' } });
+    const progressTextDefault = getByText(container, 'Loading');
+    const progressTextCustom = getByText(container, 'loading one');
+
+    expect(progressTextDefault).toBeDefined();
+    expect(progressTextCustom).toBeDefined();
   });
 
   afterEach(() => {
