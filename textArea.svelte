@@ -4,12 +4,13 @@
   export let borderColor = '#1f1c24';
   export let backgroundColor = 'transparent';
   export let rows = '3';
+  export let labelText = '';
 </script>
 
 <style>
   .textArea {
     width: 100%;
-    font-family: Poppins;
+    font-family: var(--text-font-family);
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;
@@ -28,11 +29,25 @@
   .textArea::placeholder {
     color: var(--placeholder-color);
   }
+
+  .textLabel {
+    width: 100%;
+    height: 150px;
+    font-family: var(--text-font-family);
+    font-size: 14px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 0.75px;
+  }
 </style>
 
+<label class="textLabel">{labelText}</label>
 <textarea
   class="textArea"
-  {placeholder}{rows}
-    style="--placeholder-color: {placeholderColor}; 
-           --textArea-border-color: {borderColor};
-           --textArea-background-color:{backgroundColor};"/>
+  {placeholder}
+  {rows}
+  style="--placeholder-color: {placeholderColor}; 
+         --textArea-border-color: {borderColor};
+        --textArea-background-color:{backgroundColor};" />
