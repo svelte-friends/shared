@@ -1,10 +1,9 @@
 <script>
-
   export let placeholder;
   export let placeholderColor = '#8c8c8c';
   export let borderColor = '#1f1c24';
   export let backgroundColor = 'transparent';
-
+  export let rows = '3';
 </script>
 
 <style>
@@ -33,7 +32,7 @@
 
 <textarea
   class="textArea"
-  {placeholder}
+  {placeholder}{rows}
     style="--placeholder-color: {placeholderColor}; 
            --textArea-border-color: {borderColor};
            --textArea-background-color:{backgroundColor};"/>

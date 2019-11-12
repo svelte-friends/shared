@@ -14,6 +14,24 @@ describe('textArea Test Suite', () => {
     expect(textAreaComponent).toBeInTheDocument();
   });
 
+  it('Should be able to receive a number of rows, by default will be 3, example: default', () => {
+    const container = document.body;
+    render(TextArea);
+    const textAreaComponent = container.querySelector('.textArea');
+    expect(textAreaComponent).toHaveAttribute('rows', '3');
+  });
+
+  it('It should be able to receive a number of lines, by default it will be 3, for example: receiving a line number', () => {
+    const container = document.body;
+    render(TextArea, {
+      props: {
+        rows: '5'
+      },
+    });
+    const textAreaComponent = container.querySelector('.textArea');
+    expect(textAreaComponent).toHaveAttribute('rows', '5');
+  })
+
   afterEach(() => {
     cleanup();
   });
