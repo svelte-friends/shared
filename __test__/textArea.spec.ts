@@ -30,7 +30,16 @@ describe('textArea Test Suite', () => {
     });
     const textAreaComponent = container.querySelector('.textArea');
     expect(textAreaComponent).toHaveAttribute('rows', '5');
-  })
+  });
+
+  it('entering text in the label property', () => {
+    const { getByText } = render(TextArea, {
+        props: { labelText: 'Sample'
+        }
+    }); 
+    const textAreaComponent = getByText('Sample');
+    expect(textAreaComponent).toHaveTextContent('Sample');    
+  });
 
   afterEach(() => {
     cleanup();
