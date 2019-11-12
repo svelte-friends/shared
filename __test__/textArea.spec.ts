@@ -34,11 +34,12 @@ describe('textArea Test Suite', () => {
 
   it('entering text in the label property', () => {
     const { getByText } = render(TextArea, {
-        props: { labelText: 'Sample'
-        }
-    }); 
+      props: {
+        labelText: 'Sample'
+      }
+    });
     const textAreaComponent = getByText('Sample');
-    expect(textAreaComponent).toHaveTextContent('Sample');    
+    expect(textAreaComponent).toHaveTextContent('Sample');
   });
 
   afterEach(() => {

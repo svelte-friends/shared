@@ -5,6 +5,7 @@
   export let backgroundColor = 'transparent';
   export let rows = '3';
   export let labelText = '';
+  export let labelTextColor = '#0b0e1e';
 </script>
 
 <style>
@@ -40,14 +41,17 @@
     font-style: normal;
     line-height: normal;
     letter-spacing: 0.75px;
+    color: var(--labelText-color);
   }
 </style>
 
-<label class="textLabel">{labelText}</label>
+<label class="textLabel" style="--labelText-color: {labelTextColor}">
+  {labelText}
+</label>
 <textarea
   class="textArea"
   {placeholder}
   {rows}
   style="--placeholder-color: {placeholderColor}; 
          --textArea-border-color: {borderColor};
-        --textArea-background-color:{backgroundColor};" />
+         --textArea-background-color:{backgroundColor};" />
