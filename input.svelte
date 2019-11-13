@@ -43,6 +43,12 @@
   .input::placeholder {
     color: var(--input-placeholder-color);
   }
+  .left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 3px;
+  }
   .right {
     display: flex;
     align-items: center;
@@ -59,6 +65,9 @@
 
 <div class="input-container" style={inputStyle}>
   <div class="input-body">
+    <div class="left">
+      <slot name="left" />
+    </div>
     <input
       class="input"
       on:focus={inputFocus}
