@@ -2,6 +2,7 @@
   export let label = '';
   export let checked = false;
   export let color = '#624695';
+  export let disabled = false;
 </script>
 
 <style>
@@ -37,9 +38,18 @@
     display: none;
   }
 
-  .checkbox:hover input ~ .checkbox-checkmark {
+  .checkbox:hover > .checkbox-checkmark {
     border-color: var(--checkbox-border-color);
     box-shadow: 0 1px 5px 0 rgba(40, 39, 40, 0.3);
+  }
+  .checkbox-checkmark:after {
+    left: 5.4px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
   }
 
   input:checked ~ .checkbox-checkmark {
@@ -52,19 +62,22 @@
     display: block;
   }
 
-  .checkbox-checkmark:after {
-    left: 5.4px;
-    top: 1px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
+  .disabled {
+    cursor: auto;
+  }
+  .disabled .checkbox-checkmark {
+    box-shadow: none;
+    opacity: 0.35;
+  }
+
+  .disabled:hover .checkbox-checkmark {
+    border-color: #cecece;
+    box-shadow: none;
   }
 </style>
 
-<label class="checkbox" style="--checkbox-border-color:{color}">
+<label class="checkbox" class:disabled style="--checkbox-border-color:{color}">
   {label}
-  <input type="checkbox" bind:checked value={label} on:change />
+  <input type="checkbox" {disabled} bind:checked value={label} on:change />
   <span class="checkbox-checkmark" />
 </label>
