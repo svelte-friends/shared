@@ -39,6 +39,13 @@ describe('ProgressRing Test Suite', () => {
     expect(progressIndeterminate).toHaveClass('indeterminate');
   });
 
+  it('type definition (determinate)', () => {
+    const container = document.body;
+    render(ProgressRing, { props: { type: 'determinate', percent: 30 } });
+    const progressIndeterminate = container.querySelector('.determinate');
+    expect(progressIndeterminate).toHaveClass('determinate');
+  });
+
   afterEach(() => {
     cleanup();
   });

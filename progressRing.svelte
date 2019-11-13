@@ -1,10 +1,40 @@
 <script>
+  import { beforeUpdate, afterUpdate } from 'svelte';
   export let small = false;
   export let big = false;
   export let text = 'Loading';
   export let colorText = '#0b0e1e';
   export let color = '#624695';
   export let type = 'indeterminate';
+  export let percent = '100';
+
+  let offset;
+  let svgCircle;
+  let radius = 14;
+  let circumference;
+  circumference = radius * 2 * Math.PI;
+
+  afterUpdate(() => {
+    if (type === 'determinate') {
+      applyCircumference();
+      setProgress(percent);
+    }
+  });
+
+  beforeUpdate(() => {
+    if (percent > 100) percent = 100;
+    if (percent < 0) percent = 0;
+  });
+
+  function setProgress(percent) {
+    offset = circumference - (percent / 100) * circumference;
+    svgCircle.style.strokeDashoffset = offset;
+  }
+
+  function applyCircumference() {
+    svgCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+    svgCircle.style.strokeDashoffset = `${circumference}`;
+  }
 </script>
 
 <style>
@@ -57,10 +87,19 @@
 
   .determinate {
     stroke-width: 3px;
-    stroke-dasharray: 33;
-    stroke-dashoffset: 0;
-    transform-origin: center;
-    animation: rotator 1s linear infinite;
+    transition: 0.35s stroke-dashoffset;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+    animation: progressRotator 1s linear;
+  }
+
+  @keyframes progressRotator {
+    from {
+      stroke-dashoffset: 87.9646;
+    }
+    to {
+      stroke-dashoffset: var(--dashoffset);
+    }
   }
 
   @keyframes rotator {
@@ -86,7 +125,6 @@
           <stop offset="30%" style="stop-color:transparent;" />
           <stop offset="100%" stop-color={color} />
         </radialGradient>
-
         <circle
           class="indeterminate"
           fill="none"
@@ -108,14 +146,15 @@
           cy="16"
           r="14" />
         <circle
+          bind:this={svgCircle}
           class="determinate"
-          fill="none"
+          style="--dashoffset:{offset};"
           stroke={color}
-          stroke-width="2"
-          stroke-linecap="round"
+          stroke-width="4"
+          fill="transparent"
+          r="14"
           cx="16"
-          cy="16"
-          r="14" />
+          cy="16" />
       </svg>
     {/if}
 
