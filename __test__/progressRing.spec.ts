@@ -32,6 +32,13 @@ describe('ProgressRing Test Suite', () => {
     expect(progressTextCustom).toBeDefined();
   });
 
+  it('type definition (indeterminate)', () => {
+    const container = document.body;
+    render(ProgressRing, { props: { type: 'indeterminate' } });
+    const progressIndeterminate = container.querySelector('.indeterminate');
+    expect(progressIndeterminate).toHaveClass('indeterminate');
+  });
+
   afterEach(() => {
     cleanup();
   });
