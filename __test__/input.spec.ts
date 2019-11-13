@@ -70,6 +70,16 @@ describe('Input Teste Suite', () => {
     expect(input).toHaveAttribute('type', 'text');
   });
 
+  it('Input should receive label property', () => {
+    const { getByText } = render(Input, {
+      props: {
+        label: 'Enter your address',
+      }
+    });
+    const label = getByText('Enter your address');
+    expect(label).toBeInTheDocument();
+  });
+
   afterEach(() => {
     cleanup();
   });

@@ -5,6 +5,7 @@
   export let backgroundColor = '#fff';
   export let focusColor = '#000';
   export let type = 'text';
+  export let label;
   let inputBar;
   type = /radio|checkbox/.test(type) ? 'text' : type;
 
@@ -30,8 +31,14 @@
     flex-direction: column;
   }
 
+  .input-label {
+    font-size: 12px;
+    font-weight: 500;
+  }
+
   .input-body {
     display: flex;
+    align-items: center;
   }
 
   .input {
@@ -43,40 +50,32 @@
   .input::placeholder {
     color: var(--input-placeholder-color);
   }
-  .left {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-right: 3px;
-  }
-  .right {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-left: 3px;
-  }
   .input-bar {
     width: 100%;
     height: 2px;
     background-color: var(--input-color);
     border-radius: 1px;
   }
+
+  .input-body :global(*):not(.input) {
+    width: 20px;
+    max-width: 20px;
+  }
 </style>
 
 <div class="input-container" style={inputStyle}>
+  {#if label}
+    <div class="input-label">{label}</div>
+  {/if}
   <div class="input-body">
-    <div class="left">
-      <slot name="left" />
-    </div>
+    <slot name="left" />
     <input
       class="input"
       on:focus={inputFocus}
       on:blur={inputBlur}
       {placeholder}
       {type} />
-    <div class="right">
-      <slot name="right" />
-    </div>
+    <slot name="right" />
   </div>
   <div class="input-bar" bind:this={inputBar} />
 </div>
