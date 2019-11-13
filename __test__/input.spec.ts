@@ -17,8 +17,8 @@ describe('Input Teste Suite', () => {
   it('Input have to be type "text" by default', () => {
     const { getByPlaceholderText } = render(Input, {
       props: {
-        placeholder: "Enter a name",
-      }
+        placeholder: 'Enter a name',
+      },
     });
     const input = getByPlaceholderText('Enter a name');
     expect(input).toHaveAttribute('type', 'text');
@@ -27,9 +27,9 @@ describe('Input Teste Suite', () => {
   it('Input can be as type number', () => {
     const { getByPlaceholderText } = render(Input, {
       props: {
-        placeholder: "Enter a number",
-        type: 'number'
-      }
+        placeholder: 'Enter a number',
+        type: 'number',
+      },
     });
     const input = getByPlaceholderText('Enter a number');
     expect(input).toHaveAttribute('type', 'number');
@@ -39,8 +39,8 @@ describe('Input Teste Suite', () => {
     const { getByPlaceholderText } = render(Input, {
       props: {
         placeholder: 'Enter your password',
-        type: 'password'
-      }
+        type: 'password',
+      },
     });
     const input = getByPlaceholderText('Enter your password');
     expect(input).toHaveAttribute('type', 'password');
@@ -49,9 +49,9 @@ describe('Input Teste Suite', () => {
   it('If Input receive type as "checkbox", change the type to "text"', () => {
     const { getByPlaceholderText } = render(Input, {
       props: {
-        placeholder: "Enter a name",
-        type: 'checkbox'
-      }
+        placeholder: 'Enter a name',
+        type: 'checkbox',
+      },
     });
     const input = getByPlaceholderText('Enter a name');
     expect(input).not.toHaveAttribute('type', 'checkbox');
@@ -61,9 +61,9 @@ describe('Input Teste Suite', () => {
   it('If Input receive type as "radio", change the type to "text"', () => {
     const { getByPlaceholderText } = render(Input, {
       props: {
-        placeholder: "Enter a name",
-        type: 'checkbox'
-      }
+        placeholder: 'Enter a name',
+        type: 'checkbox',
+      },
     });
     const input = getByPlaceholderText('Enter a name');
     expect(input).not.toHaveAttribute('type', 'radio');

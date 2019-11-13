@@ -5,57 +5,69 @@
   export let backgroundColor = '#fff';
   export let focusColor = '#000';
   export let type = 'text';
+  let inputBar;
+  type = /radio|checkbox/.test(type) ? 'text' : type;
 
-  type = /radio|checkbox|color/.test(type) ? 'text' : type;
+  const inputStyle = `
+    --input-color: ${color};
+    --input-background-color: ${backgroundColor};
+    --input-focus-color: ${focusColor};
+    --input-placeholder-color: ${placeholderColor};
+  `;
+
+  function inputFocus() {
+    inputBar.style.backgroundColor = focusColor;
+  }
+
+  function inputBlur() {
+    inputBar.style.backgroundColor = color;
+  }
 </script>
 
 <style>
+  .input-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .input-body {
+    display: flex;
+  }
+
   .input {
     width: 100%;
     background-color: var(--input-background-color);
     border: none;
-    border-bottom: 1px solid var(--input-color);
   }
 
   .input::placeholder {
     color: var(--input-placeholder-color);
   }
-
+  .right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 3px;
+  }
   .input-bar {
-    position: relative;
-    display: block;
     width: 100%;
-  }
-
-  .input-bar::before, .input-bar::after {
-    content: '';
     height: 2px;
-    width: 0;
-    bottom: 0;
-    position: absolute;
-    background: var(--input-color);
-    transition: 0.2s ease all;
-  }
-
-  .input-bar::before {
-    left: 50%;
-  }
-
-  .input-bar::after {
-    right: 50%;
-  }
-
-  input:focus ~ .input-bar:before, input:focus ~ .input-bar:after {
-    background: var(--input-focus-color);
-    width:50%;
+    background-color: var(--input-color);
+    border-radius: 1px;
   }
 </style>
 
-<div class="input-container"
-      style="--input-color:{color};
-              --input-background-color:{backgroundColor};
-              --input-placeholder-color: {placeholderColor};
-              --input-focus-color: {focusColor}">
-  <input class="input" {placeholder} {type} />
-  <span class="input-bar"/>
+<div class="input-container" style={inputStyle}>
+  <div class="input-body">
+    <input
+      class="input"
+      on:focus={inputFocus}
+      on:blur={inputBlur}
+      {placeholder}
+      {type} />
+    <div class="right">
+      <slot name="right" />
+    </div>
+  </div>
+  <div class="input-bar" bind:this={inputBar} />
 </div>
