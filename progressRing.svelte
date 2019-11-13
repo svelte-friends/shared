@@ -150,7 +150,7 @@
           class="determinate"
           style="--dashoffset:{offset};"
           stroke={color}
-          stroke-width="4"
+          stroke-linecap="round"
           fill="transparent"
           r="14"
           cx="16"
