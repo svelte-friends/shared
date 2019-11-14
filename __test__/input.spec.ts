@@ -74,7 +74,7 @@ describe('Input Teste Suite', () => {
     const { getByText } = render(Input, {
       props: {
         label: 'Enter your address',
-      }
+      },
     });
     const label = getByText('Enter your address');
     expect(label).toBeInTheDocument();

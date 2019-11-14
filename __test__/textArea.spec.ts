@@ -7,8 +7,8 @@ describe('textArea Test Suite', () => {
   it('Must be able to receive placeholder', () => {
     const { getByPlaceholderText } = render(TextArea, {
       props: {
-        placeholder: 'Teste'
-      }
+        placeholder: 'Teste',
+      },
     });
     const textAreaComponent = getByPlaceholderText('Teste');
     expect(textAreaComponent).toBeInTheDocument();
@@ -25,7 +25,7 @@ describe('textArea Test Suite', () => {
     const container = document.body;
     render(TextArea, {
       props: {
-        rows: '5'
+        rows: '5',
       },
     });
     const textAreaComponent = container.querySelector('.textArea');
@@ -35,8 +35,8 @@ describe('textArea Test Suite', () => {
   it('entering text in the label property', () => {
     const { getByText } = render(TextArea, {
       props: {
-        labelText: 'Sample'
-      }
+        labelText: 'Sample',
+      },
     });
     const textAreaComponent = getByText('Sample');
     expect(textAreaComponent).toHaveTextContent('Sample');

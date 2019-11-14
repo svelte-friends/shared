@@ -50,7 +50,7 @@
 
   .disabled .radio-checkmark {
     box-shadow: none;
-    opacity: 0.50;
+    opacity: 0.5;
   }
   .disabled:hover .radio-checkmark {
     border-color: #cecece;

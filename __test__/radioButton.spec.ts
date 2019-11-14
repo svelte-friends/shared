@@ -50,12 +50,12 @@ describe('RadioButton Test Suite', () => {
     const { getByLabelText } = render(RadioButton, {
       props: {
         disabled: true,
-        label: 'select all'
+        label: 'select all',
       },
     });
     const component = getByLabelText('select all');
     expect(component).not.toBeEnabled();
-  }); 
+  });
 
   afterEach(() => {
     cleanup();

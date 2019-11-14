@@ -52,6 +52,5 @@
   class="textArea"
   {placeholder}
   {rows}
-  style="--placeholder-color: {placeholderColor}; 
-         --textArea-border-color: {borderColor};
-         --textArea-background-color:{backgroundColor};" />
+  style="--placeholder-color: {placeholderColor}; --textArea-border-color: {borderColor};
+  --textArea-background-color:{backgroundColor};" />
