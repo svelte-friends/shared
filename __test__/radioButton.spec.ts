@@ -46,6 +46,17 @@ describe('RadioButton Test Suite', () => {
     expect(radioButton).toBeInTheDocument();
   });
 
+  it('Must be able to receive disabled state', () => {
+    const { getByLabelText } = render(RadioButton, {
+      props: {
+        disabled: true,
+        label: 'select all',
+      },
+    });
+    const component = getByLabelText('select all');
+    expect(component).not.toBeEnabled();
+  });
+
   afterEach(() => {
     cleanup();
   });

@@ -45,6 +45,17 @@ describe('Checkbox Test Suite', () => {
     expect(input).not.toBeChecked();
   });
 
+  it('Must be able to receive disabled state', () => {
+    const { getByLabelText } = render(Checkbox, {
+      props: {
+        disabled: true,
+        label: 'select all',
+      },
+    });
+    const component = getByLabelText('select all');
+    expect(component).not.toBeEnabled();
+  });
+
   afterEach(() => {
     cleanup();
   });

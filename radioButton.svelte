@@ -5,6 +5,7 @@
   export let name = undefined;
   export let checked = false;
   export let value = undefined;
+  export let disabled = false;
 </script>
 
 <style>
@@ -42,14 +43,26 @@
     border-width: 6px;
     border-color: var(--radio-border-color);
   }
+
+  .disabled {
+    cursor: auto;
+  }
+
+  .disabled .radio-checkmark {
+    box-shadow: none;
+    opacity: 0.5;
+  }
+  .disabled:hover .radio-checkmark {
+    border-color: #cecece;
+  }
 </style>
 
-<label class="radio" style="--radio-border-color:{color}">
+<label class="radio" class:disabled style="--radio-border-color:{color}">
   {label}
   {#if value}
-    <input type="radio" {name} {checked} on:change {value} />
+    <input type="radio" {disabled} {name} {checked} on:change {value} />
   {:else}
-    <input type="radio" {name} {checked} on:change />
+    <input type="radio" {disabled} {name} {checked} on:change />
   {/if}
   <span class="radio-checkmark" />
 </label>
