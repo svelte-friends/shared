@@ -1,5 +1,6 @@
 <script>
   export let label = '';
+  export let color = '#fff';
   let arrow = `<svg width="16" height="16" viewBox="0 0 16 16">
                 <path fill="#1A051D" fill-rule="nonzero" d="M3.415 6.65l3.826 4.464a1 1 0 0 0 1.518 0l3.826-4.463A1 1 0 0 0 11.825 5h-7.65a1 1 0 0 0-.76 1.65z"/>
                </svg>`;
@@ -11,6 +12,8 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    background-color: var(--dropdown-background);
+    padding: 0 5px;
   }
 
   .dropdown-button {
@@ -18,11 +21,11 @@
     font-size: 14px;
     font-weight: 500;
     border: none;
-    background-color: #fff;
+    background: transparent;
   }
 </style>
 
-<div class="dropdown">
+<div class="dropdown" style="--dropdown-background: {color}">
   <div class="dropdown-label">
     <button class="dropdown-button">{label}</button>
     {@html arrow}
