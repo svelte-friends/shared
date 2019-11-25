@@ -1,47 +1,30 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
-  const dispatch = createEventDispatcher();
-  export let color = 'white';
-  export let color_text = '#0b0e1e';
-  export let options = [
-    { value: 1, name: 'Option 1' },
-    { value: 2, name: 'Option 2' },
-  ];
-
-  let styleInline = `color: ${color_text}; background-color: ${color};`;
-  let selected = 2;
-
-  function isSelected() {
-    dispatch('change', { selected });
-  }
+  export let label = '';
+  let arrow = `<svg width="16" height="16" viewBox="0 0 16 16">
+                <path fill="#1A051D" fill-rule="nonzero" d="M3.415 6.65l3.826 4.464a1 1 0 0 0 1.518 0l3.826-4.463A1 1 0 0 0 11.825 5h-7.65a1 1 0 0 0-.76 1.65z"/>
+               </svg>`;
 </script>
 
 <style>
-  .container {
-    width: 250px;
-    overflow: hidden;
+  .dropdown-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
   }
 
-  select {
-    width: 100%;
-    height: 48px;
-    padding: 13px 20px 13px 12px;
+  .dropdown-button {
+    height: 25px;
     font-size: 14px;
     font-weight: 500;
-    letter-spacing: 0.75px;
     border: none;
+    background-color: #fff;
   }
 </style>
 
-<div class="container">
-  <select on:change={isSelected} bind:value={selected} style={styleInline}>
-    {#each options as option}
-      <option
-        class="option"
-        value={option.value}
-        selected={selected === option.value}>
-        {option.name}
-      </option>
-    {/each}
-  </select>
+<div class="dropdown">
+  <div class="dropdown-label">
+    <button class="dropdown-button">{label}</button>
+    {@html arrow}
+  </div>
 </div>
