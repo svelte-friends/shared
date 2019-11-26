@@ -46,21 +46,19 @@
     font-weight: 500;
     cursor: pointer;
   }
-
   .dropdown-item:hover {
     background-color: #eceff1;
   }
-
-  .show.dropdown {
-    box-shadow: 0px 0px 2px #000;
-  }
-
   .show > .dropdown-label {
-    box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+    z-index: 1;
   }
   .show > .dropdown-content {
     display: flex;
     flex-direction: column;
+    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+    position: absolute;
+    z-index: 0;
   }
 </style>
 
