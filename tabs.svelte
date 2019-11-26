@@ -7,27 +7,33 @@
     { label: 'TAB 5' },
     { label: 'TAB 6' },
     { label: 'TAB 7' },
-    { label: 'TAB 8' }
+    { label: 'TAB 8' },
   ];
-  export let active = 1;
+  export let active = 2;
 </script>
 
 <style>
   .content {
     background-color: #fff;
     width: 100%;
-    display: block;
-    justify-content: space-between;
-  }
-  .tab {
     display: flex;
-    height: 48px;
-    justify-content: center;
-    align-items: center;
+  }
+  .item {
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.5px;
     color: #8c8c8c;
+  }
+  .label {
+    letter-spacing: 0.5px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .active {
     color: #624695;
@@ -37,13 +43,18 @@
     height: 2px;
     width: 100%;
   }
+  .item:hover {
+    background-color: #e3dcef;
+  }
 </style>
 
-{#each items as item, index}
-  <div class="content">
-    <div class="tab" class:active={active - 1 == index}>{item.label}</div>
-    {#if active - 1 == index}
-      <div class="line" />
-    {/if}
-  </div>
-{/each}
+<div class="content">
+  {#each items as item, index}
+    <div on:click class="item" class:active={active - 1 == index}>
+      <div class="label" data-key={index + 1}>{item.label}</div>
+      {#if active - 1 == index}
+        <div class="line" />
+      {/if}
+    </div>
+  {/each}
+</div>
