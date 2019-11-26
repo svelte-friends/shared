@@ -1,10 +1,15 @@
 <script>
-  let items = [
-    { label: 'TAB 1', active: false },
-    { label: 'TAB 2', active: false },
-    { label: 'TAB 3', active: true },
-    { label: 'TAB 4', active: false },
+  export let items = [
+    { label: 'TAB 1' },
+    { label: 'TAB 2' },
+    { label: 'TAB 3' },
+    { label: 'TAB 4' },
+    { label: 'TAB 5' },
+    { label: 'TAB 6' },
+    { label: 'TAB 7' },
+    { label: 'TAB 8' }
   ];
+  export let active = 1;
 </script>
 
 <style>
@@ -34,10 +39,10 @@
   }
 </style>
 
-{#each items as item}
+{#each items as item, index}
   <div class="content">
-    <div class="tab" class:active={item.active}>{item.label}</div>
-    {#if item.active}
+    <div class="tab" class:active={active - 1 == index}>{item.label}</div>
+    {#if active - 1 == index}
       <div class="line" />
     {/if}
   </div>
