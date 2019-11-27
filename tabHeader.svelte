@@ -9,7 +9,7 @@
     { label: 'TAB 7' },
     { label: 'TAB 8' },
   ];
-  export let active = 2;
+  export let active = 1;
   export let textColor = '#8c8c8c';
   export let textColorActive = '#624695';
   export let colorBackground = '#fff';
@@ -51,8 +51,6 @@
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.5px;
-    padding-left: 30px;
-    padding-right: 30px;
   }
   .label {
     white-space: nowrap;
@@ -62,6 +60,8 @@
     justify-content: center;
     align-items: center;
     color: var(--color-text);
+    padding-left: 30px;
+    padding-right: 30px;
   }
   .item:hover {
     color: var(--color-text-hover);
@@ -97,7 +97,7 @@
 
 <div class="content" style={styleColor}>
   {#each items as item, index}
-    <div on:click class="item" class:active={active - 1 == index}>
+    <div class="item" class:active={active - 1 == index}>
       <div class="label" data-key={index + 1}>{item.label}</div>
       {#if active - 1 == index}
         <div class="line" />
