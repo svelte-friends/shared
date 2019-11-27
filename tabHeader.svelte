@@ -71,6 +71,9 @@
     color: var(--color-text-hover);
   }
   .item.active > .label {
+    color: var(--color-text-active);
+  }
+  .item.active:hover > .label {
     color: var(--color-text-hover);
   }
   .active {
@@ -95,10 +98,15 @@
   }
 </style>
 
-<div class="content" style={styleColor}>
+<div class="content" style={styleColor} on:click>
   {#each items as item, index}
     <div class="item" class:active={active - 1 == index}>
-      <div class="label" data-key={index + 1}>{item.label}</div>
+      <div
+        on:click={() => (active = index + 1)}
+        class="label"
+        data-key={index + 1}>
+        {item.label}
+      </div>
       {#if active - 1 == index}
         <div class="line" />
       {/if}
