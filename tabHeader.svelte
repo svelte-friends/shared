@@ -17,6 +17,8 @@
   export let colorLine = '#624695';
   export let colorBackgroundHover = '#e3dcef';
   export let textColorHover = '#8c8c8c';
+  export let colorScrollbar = '#624695';
+  export let colorScrollbarTrack = '#ebebeb';
 
   const styleColor = `
     --color-background: ${colorBackground};
@@ -26,59 +28,77 @@
     --color-text-hover: ${textColorHover};
     --color-text:${textColor};
     --color-line:${colorLine};
+    --color-scrollbar-track:${colorScrollbarTrack};
+    --color-scrollbar:${colorScrollbar};
   `;
 </script>
 
 <style>
   .content {
-    background-color: var(--color-background);
     width: 100%;
     display: flex;
+    overflow: hidden;
+  }
+  .content:hover {
+    overflow-x: auto;
+    overflow-y: hidden;
   }
   .item {
+    background-color: var(--color-background);
     cursor: pointer;
-    width: 100%;
     display: flex;
     flex-direction: column;
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.5px;
+    padding-left: 30px;
+    padding-right: 30px;
   }
   .label {
-    letter-spacing: 0.5px;
+    white-space: nowrap;
     height: 48px;
+    letter-spacing: 0.5px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: var(--color-text);
   }
-  .label:hover {
+  .item:hover {
     color: var(--color-text-hover);
     background-color: var(--color-background-hover);
   }
-  .label.active:hover {
-    color: var(--color-text-active);
+  .item:hover > .label {
+    color: var(--color-text-hover);
+  }
+  .item.active > .label {
+    color: var(--color-text-hover);
   }
   .active {
     background-color: var(--color-background-active);
-    color: var(--color-text-active);
   }
   .line {
     background-color: var(--color-line);
     height: 2px;
     width: 100%;
   }
+  ::-webkit-scrollbar {
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: var(--color-scrollbar-track);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-scrollbar);
+    border-radius: 10px;
+  }
 </style>
 
 <div class="content" style={styleColor}>
   {#each items as item, index}
-    <div on:click class="item">
-      <div
-        class="label"
-        class:active={active - 1 == index}
-        data-key={index + 1}>
-        {item.label}
-      </div>
+    <div on:click class="item" class:active={active - 1 == index}>
+      <div class="label" data-key={index + 1}>{item.label}</div>
       {#if active - 1 == index}
         <div class="line" />
       {/if}
