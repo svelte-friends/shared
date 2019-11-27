@@ -45,23 +45,21 @@
     letter-spacing: 0.5px;
   }
   .label {
-    letter-spacing: 0.5px;
     height: 48px;
+    letter-spacing: 0.5px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: var(--color-text);
   }
-  .label:hover {
-    color: var(--color-text-hover);
+  .item:hover {
     background-color: var(--color-background-hover);
   }
-  .label.active:hover {
-    color: var(--color-text-active);
+  .item.active > .label {
+    color: var(--color-text-hover);
   }
   .active {
     background-color: var(--color-background-active);
-    color: var(--color-text-active);
   }
   .line {
     background-color: var(--color-line);
@@ -72,13 +70,8 @@
 
 <div class="content" style={styleColor}>
   {#each items as item, index}
-    <div on:click class="item">
-      <div
-        class="label"
-        class:active={active - 1 == index}
-        data-key={index + 1}>
-        {item.label}
-      </div>
+    <div on:click class="item" class:active={active - 1 == index}>
+      <div class="label" data-key={index + 1}>{item.label}</div>
       {#if active - 1 == index}
         <div class="line" />
       {/if}
