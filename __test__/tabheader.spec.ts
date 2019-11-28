@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/extend-expect';
 import 'jest';
 import { render, cleanup } from '@testing-library/svelte';
-import Tabs from '../tabs.svelte';
+import TabHeader from '../tabHeader.svelte';
 
 describe('receive items tab component', () => {
   it('Receive items', () => {
@@ -10,7 +10,7 @@ describe('receive items tab component', () => {
       { label: 'TAB 1' },
       { label: 'TAB 2' }
     ]
-    const { getByText } = render(Tabs, {
+    const { getByText } = render(TabHeader, {
       props: {
         items: items
       },
@@ -21,19 +21,20 @@ describe('receive items tab component', () => {
   });
 
   it('Active tabs', () => {
+
     let items = [
       { label: 'TAB 1' },
       { label: 'TAB 2' }
     ]
-    const { getByText } = render(Tabs, {
+    const  {getByText} = render(TabHeader, {
       props: {
         items: items,
         active: 2
       },
     })
 
-    const tabActive = getByText('TAB 2');
-    expect(tabActive).toHaveClass('active');
+    const tabsActive = getByText('TAB 2')
+    expect(tabsActive.parentElement).toHaveClass('active')
 
   });
 
