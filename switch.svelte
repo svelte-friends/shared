@@ -52,6 +52,9 @@
   input:checked + .slider:before {
     transform: translateX(17.3px);
   }
+  .disabled {
+    cursor: auto;
+  }
 
   input:disabled + .slider {
     background-color: #cecece;
@@ -75,5 +78,5 @@
   class="switch"
   style="--switch-background-color:{color}; --switch-button-color:{buttonColor}">
   <input type="checkbox" checked={on} {disabled} />
-  <div class="slider round" />
+  <div class:disabled class="slider round" />
 </label>
