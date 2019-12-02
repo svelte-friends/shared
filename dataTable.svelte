@@ -1,17 +1,41 @@
 <script>
+  export let striped = true;
+  export let textAlignHeader = 'start';
+  export let textAlignBody = 'start';
+  export let colorTextHeader = '#fff';
+  export let colorbackgroundHeader = '#624695';
+  export let colorBackgroundBody = '#fff';
+  export let colorTextBody = 'black';
+  export let colorbackgroundStriped = '#ebebeb';
+
   export let col = 4;
   let columnTotal = [];
+  
   export let thead = ['Column 1', 'Column 2', 'Column 3', 'Column 4'];
-  export let tbody = [
-    ['Test 1', 'Test 2', 'Test 3', 'Test 4'],
-    ['Test 1', 'Test 2', 'Test 3', 'Test 4'],
-    ['Test 1', 'Test 2', 'Test 3', 'Test 4'],
-  ];
+  export let tbody = [];
   export let tbodyComponent = [];
+
+  if (!striped) {
+    colorbackgroundStriped = 'transparent';
+  }
 
   for (let i = 0; i < col; i++) {
     columnTotal.push(i);
   }
+  let prefixHeader = '';
+  let prefixBody = '';
+  if (textAlignBody == 'end') prefixBody = 'flex-';
+
+  const styleColor = `
+    --color-text-header: ${colorTextHeader};
+    --color-background-header: ${colorbackgroundHeader};
+    --color-background-body: ${colorBackgroundBody};
+    --color-text-body: ${colorTextBody};
+    --color-background-striped: ${colorbackgroundStriped};
+    --color-background-striped: ${colorbackgroundStriped};
+    --text-align-header: ${prefixHeader + textAlignHeader};
+    --text-align-body: ${prefixBody + textAlignBody};
+  `;
 </script>
 
 <style>
@@ -23,14 +47,13 @@
   .header {
     width: 100%;
     height: 55px;
-    background-color: red;
+    background-color: var(--color-background-header);
     display: flex;
-    justify-content: space-;
-    justify-items: flex-start;
+    text-align: var(--text-align-header);
   }
   .header-content {
     width: 100%;
-    color: white;
+    color: var(--color-text-header);
     font-weight: 600;
     padding: 20px;
   }
@@ -44,24 +67,28 @@
     display: flex;
     flex-direction: column;
     justify-items: flex-start;
+    background-color: var(--color-background-body);
   }
   .tbody-row {
     display: flex;
+    text-align: var(--text-align-body);
   }
   .tbody-column {
     width: 100%;
     display: flex;
     flex-direction: column;
-    /* background-color: #ccc; */
-    justify-items: flex-start;
     padding: 20px;
+    justify-content: center;
+    color: var(--color-text-body);
+    text-align: var(--text-align-body);
+    align-items: var(--text-align-body);
   }
   .tbody-content .tbody-row:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: var(--color-background-striped);
   }
 </style>
 
-<div class="content">
+<div class="content" style={styleColor}>
 
   <div class="header">
     {#each thead as item}
