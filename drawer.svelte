@@ -1,13 +1,13 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
   export let show = false;
 
-  function handleClose() {
-    show = false;
-  }
+  const dispatch = createEventDispatcher();
+  const close = () => dispatch('close');
 </script>
 
 <style>
-  .drawer-menu {
+  .drawer-sidebar {
     left: 0;
     z-index: 1;
     position: absolute;
@@ -27,9 +27,9 @@
 
 {#if show}
   <div class="drawer">
-    <div class="drawer-menu">
+    <div class="drawer-sidebar">
       <slot />
     </div>
-    <div class="drawer-background" on:click={handleClose} />
+    <div class="drawer-background" on:click={close} />
   </div>
 {/if}
