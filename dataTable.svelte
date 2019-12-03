@@ -7,10 +7,8 @@
   export let colorBackgroundBody = '#fff';
   export let colorTextBody = 'black';
   export let colorbackgroundStriped = '#ebebeb';
-
   export let col = 4;
   let columnTotal = [];
-  
   export let thead = ['Column 1', 'Column 2', 'Column 3', 'Column 4'];
   export let tbody = [];
   export let tbodyComponent = [];
@@ -91,8 +89,8 @@
 <div class="content" style={styleColor}>
 
   <div class="header">
-    {#each thead as item}
-      <div class="header-content">{item}</div>
+    {#each columnTotal as colIndex}
+      <div class="header-content">{thead[colIndex] ? thead[colIndex] : ''}</div>
     {/each}
   </div>
 
