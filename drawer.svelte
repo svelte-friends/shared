@@ -1,5 +1,13 @@
+<script>
+  export let show = false;
+
+  function handleClose() {
+    show = false;
+  }
+</script>
+
 <style>
-  .drawer {
+  .drawer-menu {
     left: 0;
     z-index: 1;
     position: absolute;
@@ -9,15 +17,19 @@
 
   .drawer-background {
     position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background: rgba(0,0,0,0.3);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
   }
 </style>
 
-<div class="drawer-background"></div>
-<div class="drawer">
-  <slot />
-</div>
+{#if show}
+  <div class="drawer">
+    <div class="drawer-menu">
+      <slot />
+    </div>
+    <div class="drawer-background" on:click={handleClose} />
+  </div>
+{/if}
