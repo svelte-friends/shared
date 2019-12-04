@@ -24,6 +24,18 @@ describe('Drawer Test Suite', () => {
     expect(handleClose).toHaveBeenCalledTimes(1);
   });
 
+  it('Should receive a "persistent" property', () => {
+    const { container } = render(Drawer, {
+      props: {
+        show: true,
+        persistent: true,
+      }
+    });
+    const drawer = container.querySelector('.drawer');
+    expect(drawer).toBeInTheDocument();
+    expect(drawer).toHaveClass('persistent');
+  })
+
   afterEach(() => {
     cleanup();
   });
