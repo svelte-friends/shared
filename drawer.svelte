@@ -1,6 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   export let show = false;
+  export let persistent = false;
 
   const dispatch = createEventDispatcher();
   const close = () => dispatch('close');
@@ -23,13 +24,19 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.3);
   }
+
+  .persistent > .drawer-sidebar{
+    position: relative;
+  }
 </style>
 
 {#if show}
-  <div class="drawer">
+  <div class="drawer" class:persistent>
     <div class="drawer-sidebar">
       <slot />
     </div>
-    <div class="drawer-background" on:click={close} />
+    {#if !persistent}
+      <div class="drawer-background" on:click={close} />
+    {/if}
   </div>
 {/if}
