@@ -2,6 +2,7 @@
   export let labelColor = '';
   export let steps = ['step1', 'step2', 'step3', 'step4'];
   export let stepColor = '';
+  export let numberColor = '';
 </script>
 
 <style>
@@ -29,7 +30,7 @@
     text-align: center;
     border-radius: 50%;
     background-color: var(--stepper-circle-color);
-    color: #fff;
+    color: var(--stepper-number-color);
     font-size: 20px;
   }
 
@@ -41,7 +42,8 @@
 
 <ul
   class="stepper"
-  style=" --stepper-label-color:{labelColor}; --stepper-circle-color:{stepColor}">
+  style=" --stepper-label-color:{labelColor}; --stepper-circle-color:{stepColor};
+  --stepper-number-color:{numberColor}">
   {#each steps as step, index}
     <li class="step">
       <div class="step-circle">{index + 1}</div>
