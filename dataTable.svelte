@@ -1,5 +1,7 @@
 <script>
   export let striped = true;
+  export let border = false;
+  export let colorBorder = "#ddd";
   export let textAlignHeader = 'start';
   export let textAlignBody = 'start';
   export let colorTextHeader = '#fff';
@@ -29,7 +31,7 @@
     --color-background-header: ${colorbackgroundHeader};
     --color-background-body: ${colorBackgroundBody};
     --color-text-body: ${colorTextBody};
-    --color-background-striped: ${colorbackgroundStriped};
+    --color-border: ${colorBorder};
     --color-background-striped: ${colorbackgroundStriped};
     --text-align-header: ${prefixHeader + textAlignHeader};
     --text-align-body: ${prefixBody + textAlignBody};
@@ -37,83 +39,73 @@
 </script>
 
 <style>
-  .content {
+  .table {
+    border-collapse: collapse;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-  .header {
-    width: 100%;
-    height: 55px;
-    background-color: var(--color-background-header);
-    display: flex;
-    text-align: var(--text-align-header);
-  }
-  .header-content {
-    width: 100%;
-    color: var(--color-text-header);
-    font-weight: 600;
-    padding: 20px;
-  }
-  .tbody {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .tbody-content {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-items: flex-start;
+    margin-bottom: 25px;
     background-color: var(--color-background-body);
   }
-  .tbody-row {
-    display: flex;
-    text-align: var(--text-align-body);
-  }
-  .tbody-column {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    justify-content: center;
+
+  .table td,
+  .table th {
+    padding: 10px;
     color: var(--color-text-body);
-    text-align: var(--text-align-body);
-    align-items: var(--text-align-body);
   }
-  .tbody-content .tbody-row:nth-child(even) {
+
+  .table.border,
+  .table.border td,
+  .table.border th {
+    border: 1px solid var(--color-border);
+  }
+
+  .table tr:nth-child(even) {
     background-color: var(--color-background-striped);
+  }
+
+  .table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: var(--color-background-header);
+    color: var(--color-text-header);
   }
 </style>
 
-<div class="content" style={styleColor}>
+<table class="table {border ? 'border' : ''}" style={styleColor}>
+  <thead class="header">
+    <tr>
+      {#each columnTotal as colIndex}
+        {#if thead[colIndex]}
+          <th
+            style={thead[colIndex].width ? `width:${thead[colIndex].width}` : ''}>
+            {thead[colIndex] ? thead[colIndex].label : ''}
+          </th>
+        {:else}
+          <th />
+        {/if}
+      {/each}
+    </tr>
+  </thead>
 
-  <div class="header">
-    {#each columnTotal as colIndex}
-      <div class="header-content">{thead[colIndex] ? thead[colIndex] : ''}</div>
-    {/each}
-  </div>
-
-  <div class="tbody">
-    {#each columnTotal as colIndex}
-      <svelte:component this={tbodyComponent[colIndex]} />
-    {/each}
-  </div>
-
-  <div class="tbody-content">
+  <tbody>
     {#each tbody as array}
-      <div class="tbody-row">
+      <tr>
         {#each array as item}
-          <div class="tbody-column">
-            {#if typeof item === 'string'}
-              {item}
-            {:else}
+          {#if typeof item === 'string'}
+            <td>{item}</td>
+          {:else}
+            <td>
               <svelte:component this={item} />
-            {/if}
-          </div>
+            </td>
+          {/if}
         {/each}
-      </div>
+      </tr>
     {/each}
-  </div>
 
-</div>
+    {#each columnTotal as colIndex}
+      {#if tbodyComponent[colIndex]}
+        <svelte:component this={tbodyComponent[colIndex]} />
+      {/if}
+    {/each}
+  </tbody>
+</table>
