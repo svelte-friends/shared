@@ -1,41 +1,50 @@
 import 'jest';
 import '@testing-library/jest-dom/extend-expect';
-import { render, cleanup, fireEvent } from '@testing-library/svelte';
+import { render, cleanup } from '@testing-library/svelte';
+import { getByText, fireEvent } from '@testing-library/dom';
 import Dropdown from '../dropdown.svelte';
 
 describe('Dropdown Test Suite', () => {
-  it('Dropdown may be colorized', () => {
-    const container = document.body;
-    render(Dropdown, { props: { color: 'red' } });
-    const select = container.querySelector('select');
-    expect(select).toHaveStyle('background-color:red');
+  const list = ['Debug', 'Explorer', 'Extensions'];
+  it('Should receive a "label" property', () => {
+    const { getByText } = render(Dropdown, {
+      props: {
+        label: 'View',
+      }
+    });
+
+    const label = getByText('View');
+    expect(label).toBeInTheDocument();
   });
 
-  it('Dropdown can receive options', () => {
-    let list = [
-      { value: '1', name: 'Option 1' },
-      { value: '2', name: 'Option 2' },
-    ];
-
+  it('Should receive array of strings to items', () => {
     const container = document.body;
-    render(Dropdown, { props: { options: list } });
-    const select = container.querySelector('select');
-    expect(select.childElementCount).toBe(list.length);
+    render(Dropdown, {
+      props: {
+        list
+      }
+    });
+
+    const debug = getByText(container, 'Debug');
+    expect(debug).toBeInTheDocument();
+    const explorer = getByText(container, 'Explorer');
+    expect(explorer).toBeInTheDocument();
+    const extensions = getByText(container, 'Extensions');
+    expect(extensions).toBeInTheDocument();
   });
 
-  it('Can receive text color', () => {
+  it('Should dropdown expand when button is clicked', async () => {
     const container = document.body;
-    render(Dropdown, { props: { color_text: 'blue' } });
-    const select = container.querySelector('select');
-    expect(select).toHaveStyle('color:blue');
-  });
+    render(Dropdown, {
+      props: {
+        label: 'View',
+        list,
+      }
+    });
 
-  it('If no text color or background color is passed, assume the default value', () => {
-    const container = document.body;
-    render(Dropdown);
-    const select = container.querySelector('select');
-    expect(select).toHaveStyle('color:#0b0e1e');
-    expect(select).toHaveStyle('background-white:');
+    const dropdown = container.querySelector('.dropdown');
+    await fireEvent.click(dropdown);
+    expect(dropdown).toHaveClass('show');
   });
 
   afterEach(() => {

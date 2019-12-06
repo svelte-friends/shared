@@ -1,13 +1,7 @@
 <script>
-  export let text = 'Label';
-  export let color = '#624695';
-  export let type = 'fill'; //fill or outline
-  let label;
-
-  let inLine =
-    type === 'outline'
-      ? `background: transparent; color: ${color}; border: 1px solid ${color};`
-      : `background-color: ${color};`;
+  export let text = '';
+  export let outline;
+  export let colorLabel = '#624695';
 </script>
 
 <style>
@@ -15,16 +9,28 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 10px;
-    color: var(--labelColor, white);
-    font-weight: 500;
-    text-align: center;
     padding: 0.4em;
     border-radius: 5px;
-    width: 60px;
-    min-height: 25px;
+    min-width: 60px;
+    height: 25px;
+    background-color: var(--color-label);
+  }
+  .textLabel {
+    font-family: var(--text-font-family);
+    font-size: 10px;
     letter-spacing: 1px;
+    color: #fff;
+  }
+  .outline {
+    border: solid 1px var(--color-label);
+    background-color: transparent;
+  }
+
+  .outline > .textLabel {
+    color: var(--color-label);
   }
 </style>
 
-<div class="label" style={inLine}>{text}</div>
+<div class="label" style="--color-label: {colorLabel}" class:outline>
+  <div class="textLabel">{text}</div>
+</div>
