@@ -1,6 +1,6 @@
 import 'jest';
 import '@testing-library/jest-dom/extend-expect';
-import { render, cleanup } from '@testing-library/svelte';
+import { render, cleanup, fireEvent } from '@testing-library/svelte';
 import Input from '../input.svelte';
 
 describe('Input Teste Suite', () => {
@@ -78,6 +78,20 @@ describe('Input Teste Suite', () => {
     });
     const label = getByText('Enter your address');
     expect(label).toBeInTheDocument();
+  });
+
+  it('Input type "password" should have a button to show/hide characteres', async () => {
+    const { getByPlaceholderText, container } = render(Input, {
+      props: {
+        placeholder: 'Password',
+        type: 'password',
+      }
+    });
+    const input = getByPlaceholderText('Password');
+    const eyeButton = container.querySelector('.input-password-eye');
+    expect(input).toHaveAttribute('type', 'password');
+    await fireEvent.click(eyeButton);
+    expect(input).toHaveAttribute('type', 'text');
   });
 
   afterEach(() => {
