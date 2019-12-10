@@ -6,7 +6,7 @@
   export let steps = [
     { label: 'STEP 1', done: false },
     { label: 'STEP 2', done: false },
-  ]
+  ];
   const styleColor = ` 
   --stepper-label-color: ${labelColor}; 
   --stepper-circle-color: ${stepColor};
@@ -14,6 +14,7 @@
   --stepper-done-color: ${doneColor};
   `;
   let check = `<svg viewBox="0 0 512 512" style="fill: #fff; width: 66%;"><path d="M186.301 339.893L96 249.461l-32 30.507L186.301 402 448 140.506 416 110z"/></svg>`;
+
 </script>
 
 <style>
@@ -75,15 +76,16 @@
   {#each steps as step, index}
     <li class="step">
       <div class="step-circle" class:done={step.done}>
+      <slot name="icon" {step}>
         {#if step.done}
           {@html check}
-        {:else}
-          {index + 1}
+        {:else}{index + 1}
         {/if}
+      </slot>
       </div>
       {#if step.label}
-      <div class="step-label">{step.label}</div>
-      {/if}
+        <div class="step-label">{step.label}</div>
+      {/if}   
     </li>
   {/each}
 </ul>
