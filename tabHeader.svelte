@@ -123,7 +123,7 @@
   }
 </style>
 
-<div class="content" style={styleColor} on:click>
+<div class="content" style={styleColor}>
   {#each items as item, index}
     <div
       class="item"
