@@ -18,9 +18,9 @@ describe('Drawer Test Suite', () => {
       },
     });
     component.$on('close', handleClose);
-    const drawer = container.querySelector('.drawer');
-    expect(drawer).toBeInTheDocument();
-    await fireEvent.click(drawer.children[1]);
+    const drawerBackground = container.querySelector('.drawer-background');
+    expect(drawerBackground).toBeInTheDocument();
+    await fireEvent.click(drawerBackground);
     expect(handleClose).toHaveBeenCalledTimes(1);
   });
 
@@ -31,9 +31,9 @@ describe('Drawer Test Suite', () => {
         persistent: true,
       }
     });
-    const drawer = container.querySelector('.drawer');
-    expect(drawer).toBeInTheDocument();
-    expect(drawer).toHaveClass('persistent');
+    const drawerSidebar = container.querySelector('.drawer-sidebar');
+    expect(drawerSidebar).toBeInTheDocument();
+    expect(drawerSidebar).toHaveClass('persistent');
   })
 
   afterEach(() => {
