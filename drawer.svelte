@@ -1,6 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte';
-  import { fly } from 'svelte/transition';
+  import { fly, fade } from 'svelte/transition';
   export let show = true;
   export let persistent = false;
 
@@ -19,7 +19,7 @@
     position: fixed;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.5);
   }
 
   .drawer-sidebar,
@@ -32,11 +32,9 @@
   }
 </style>
 
-{#if show}
-  <div class="drawer-sidebar" class:persistent transition:fly={{ x: -500 }}>
-    <slot />
-  </div>
-  {#if !persistent}
-    <div class="drawer-background" on:click={close} />
-  {/if}
+<div class="drawer-sidebar" class:persistent transition:fly={{ x: -500 }}>
+  <slot />
+</div>
+{#if !persistent}
+  <div class="drawer-background" on:click={close} transition:fade />
 {/if}
