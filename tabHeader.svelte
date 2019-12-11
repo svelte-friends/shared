@@ -43,6 +43,9 @@
     overflow-x: auto;
     overflow-y: hidden;
   }
+  #item > * {
+    pointer-events: none;
+  }
   .item {
     background-color: var(--color-background);
     cursor: pointer;
@@ -51,6 +54,7 @@
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.5px;
+    align-items: center;
   }
   .label {
     white-space: nowrap;
@@ -67,14 +71,30 @@
     color: var(--color-text-hover);
     background-color: var(--color-background-hover);
   }
-  .item:hover > .label {
+  .item:hover > .content-item > .label {
     color: var(--color-text-hover);
   }
-  .item.active > .label {
+  .item.active > .content-item > .label {
     color: var(--color-text-active);
   }
-  .item.active:hover > .label {
+  .item.active:hover > .content-item > .label {
+    fill: var(--color-text-hover);
     color: var(--color-text-hover);
+  }
+  .item.active:hover > .content-item > .icon {
+    fill: var(--color-text-hover);
+  }
+  .icon {
+    width: 40px;
+    margin-top: 6px;
+    margin-bottom: -6px;
+    fill: var(--color-text);
+  }
+  .item:hover > .content-item > .icon {
+    fill: var(--color-text-hover);
+  }
+  .item.active > .content-item > .icon {
+    fill: var(--color-text-active);
   }
   .active {
     background-color: var(--color-background-active);
@@ -91,21 +111,30 @@
     background-color: var(--color-scrollbar-track);
     border-radius: 10px;
   }
-
   ::-webkit-scrollbar-thumb {
     background: var(--color-scrollbar);
     border-radius: 10px;
+  }
+  .content-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 </style>
 
 <div class="content" style={styleColor} on:click>
   {#each items as item, index}
-    <div class="item" class:active={active - 1 == index}>
-      <div
-        on:click={() => (active = index + 1)}
-        class="label"
-        data-key={index + 1}>
-        {item.label}
+    <div
+      class="item"
+      id="parent"
+      on:click={() => (active = index + 1)}
+      class:active={active - 1 == index}>
+      <div class="content-item">
+        <div class="icon">
+          <slot name="icon" {item} />
+        </div>
+        <div class="label" data-key={index + 1}>{item.label}</div>
       </div>
       {#if active - 1 == index}
         <div class="line" />
