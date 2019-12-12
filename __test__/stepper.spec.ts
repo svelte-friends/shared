@@ -22,9 +22,9 @@ describe('receive items stepper component', () => {
 
     it('checking if it was checked', () => {
         let steps = [
-            { label: 'STEP 1', done: true },
-            { label: 'STEP 2', done: true },
-            { label: 'Step 3', done: false },
+            { label: 'STEP 1', completed: true },
+            { label: 'STEP 2', completed: true },
+            { label: 'Step 3', active: true },
         ]
         const { container } = render(Stepper, {
             props: {
@@ -32,9 +32,9 @@ describe('receive items stepper component', () => {
             },
         });
         const stepperElement = container.querySelectorAll('.step-circle')
-        expect(stepperElement[0]).toHaveClass('done');
-        expect(stepperElement[1]).toHaveClass('done');
-        expect(stepperElement[2]).not.toHaveClass('done');
+        expect(stepperElement[0]).toHaveClass('completed');
+        expect(stepperElement[1]).toHaveClass('completed');
+        expect(stepperElement[2]).not.toHaveClass('completed');
     });
     afterEach(() => {
         cleanup();
