@@ -1,10 +1,9 @@
 <script>
-  import { onMount, afterUpdate } from 'svelte';
   export let color = '#624695';
   export let label = '';
-  export let name = undefined;
+  export let name;
+  export let value;
   export let checked = false;
-  export let value = undefined;
   export let disabled = false;
 </script>
 
@@ -59,10 +58,6 @@
 
 <label class="radio" class:disabled style="--radio-border-color:{color}">
   {label}
-  {#if value}
-    <input type="radio" {disabled} {name} {checked} on:change {value} />
-  {:else}
-    <input type="radio" {disabled} {name} {checked} on:change />
-  {/if}
+  <input type="radio" {disabled} {name} {checked} {value} on:change />
   <span class="radio-checkmark" />
 </label>
