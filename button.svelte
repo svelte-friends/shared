@@ -32,6 +32,19 @@
     border-radius: 5px;
     padding: 0 15px;
   }
+  .button:disabled,
+  .button:disabled:hover,
+  .button:disabled:active {
+    background-color: #d5d5d5;
+    color: #979797;
+  }
+  .button.outline:disabled,
+  .button.outline:disabled:hover,
+  .button.outline:disabled:active {
+    background-color: transparent;
+    color: #979797;
+    border-color: #979797;
+  }
   .button:hover {
     background-color: var(--button-hover-color);
   }
