@@ -8,56 +8,62 @@
 </script>
 
 <style>
-  .radio {
-    display: block;
+  .radio-button {
+    display: flex;
+    align-items: center;
     position: relative;
-    padding: 2px 0 0 25px;
-    margin-bottom: 5px;
+    padding-left: 22px;
     cursor: pointer;
     user-select: none;
-    min-height: 18px;
+    height: 18px;
   }
 
-  .radio input {
+  .radio-button input {
     position: absolute;
-    opacity: 0;
     cursor: pointer;
+    left: 0;
+    height: 100%;
+    width: 18px;
+    opacity: 0;
   }
 
-  .radio-checkmark {
+  .radio-button-checkmark {
     position: absolute;
     top: 0;
     left: 0;
-    height: 18px;
+    height: 100%;
     width: 18px;
     border-radius: 50%;
     border: 2px solid #cecece;
   }
 
-  .radio:hover input ~ .radio-checkmark {
-    border-color: var(--radio-border-color);
+  .radio-button:hover input ~ .radio-button-checkmark {
+    border-color: var(--radio-button-border-color);
   }
 
-  .radio input:checked ~ .radio-checkmark {
+  .radio-button input:checked ~ .radio-button-checkmark {
     border-width: 6px;
-    border-color: var(--radio-border-color);
+    border-color: var(--radio-button-border-color);
   }
 
   .disabled {
     cursor: auto;
   }
 
-  .disabled .radio-checkmark {
+  .disabled .radio-button-checkmark {
     box-shadow: none;
     opacity: 0.5;
   }
-  .disabled:hover .radio-checkmark {
+  .disabled:hover .radio-button-checkmark {
     border-color: #cecece;
   }
 </style>
 
-<label class="radio" class:disabled style="--radio-border-color:{color}">
+<label
+  class="radio-button"
+  class:disabled
+  style="--radio-button-border-color:{color}">
   {label}
   <input type="radio" {disabled} {name} {checked} {value} on:change />
-  <span class="radio-checkmark" />
+  <span class="radio-button-checkmark" />
 </label>
