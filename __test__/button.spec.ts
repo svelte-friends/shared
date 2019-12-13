@@ -63,6 +63,16 @@ describe('Button Test Suite', () => {
     expect(button).toHaveClass('full');
   });
 
+  it('Disabled button', () => {
+    const { container } = render(Button, {
+      props: {
+        disabled: true,
+      }
+    });
+    const button = container.querySelector('.button');
+    expect(button).toHaveAttribute('disabled');
+  });
+
   it('Trigger "click" event when button is clicked', async () => {
     const handleClick = jest.fn();
     const { container, component } = render(Button);

@@ -3,6 +3,7 @@
   export let hover = '#3f2371';
   export let active = '#26124a';
 
+  export let disabled = false;
   export let small = false;
   export let big = false;
   export let pill = false;
@@ -19,7 +20,6 @@
 <style>
   .button {
     text-align: center;
-    vertical-align: middle;
     user-select: none;
     color: white;
     border: none;
@@ -29,8 +29,8 @@
     background-color: var(--button-color);
     box-shadow: 0 0 7px 0 rgba(40, 39, 40, 0.25);
     height: 38px;
-    min-width: 100px;
     border-radius: 5px;
+    padding: 0 15px;
   }
   .button:hover {
     background-color: var(--button-hover-color);
@@ -65,17 +65,19 @@
   }
   .full {
     width: 100%;
+    padding: 0;
   }
 </style>
 
 <button
+  {style}
+  {disabled}
   class="button"
   class:small
   class:big
   class:pill
   class:outline
   class:full
-  on:click
-  {style}>
+  on:click>
   <slot />
 </button>
