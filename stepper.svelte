@@ -1,17 +1,19 @@
 <script>
-  export let labelColor = '#6f6f6f';
-  export let doneColor = '#624695';
-  export let stepColor = '#ccc';
-  export let numberColor = '#6f6f6f';
+  export let labelColor = '#6c757d';
+  export let completedColor = '#2bbbad';
+  export let stepColor = '#6c757d';
+  export let numberColor = '#fff';
+  export let activeColor = '#624695';
   export let steps = [
-    { label: 'STEP 1', done: false },
-    { label: 'STEP 2', done: false },
-  ]
+    { label: 'STEP 1', completed: false },
+    { label: 'STEP 2', active: false },
+  ];
   const styleColor = ` 
   --stepper-label-color: ${labelColor}; 
   --stepper-circle-color: ${stepColor};
   --stepper-number-color: ${numberColor};
-  --stepper-done-color: ${doneColor};
+  --stepper-completed-color: ${completedColor};
+  --stepper-active-color: ${activeColor};
   `;
   let check = `<svg viewBox="0 0 512 512" style="fill: #fff; width: 66%;"><path d="M186.301 339.893L96 249.461l-32 30.507L186.301 402 448 140.506 416 110z"/></svg>`;
 </script>
@@ -66,23 +68,31 @@
     content: none;
   }
 
-  .done {
-    background-color: var(--stepper-done-color);
+  .completed {
+    background-color: var(--stepper-completed-color);
+  }
+
+  .active {
+    background-color: var(--stepper-active-color);
   }
 </style>
 
 <ul class="stepper" style={styleColor}>
   {#each steps as step, index}
     <li class="step">
-      <div class="step-circle" class:done={step.done}>
-        {#if step.done}
-          {@html check}
-        {:else}
-          {index + 1}
-        {/if}
+      <div
+        class="step-circle"
+        class:completed={step.completed}
+        class:active={step.active}>
+        <slot name="icon" {step}>
+          {#if step.completed}
+            {@html check}
+          {:else}{index + 1}
+          {/if}
+        </slot>
       </div>
       {#if step.label}
-      <div class="step-label">{step.label}</div>
+        <div class="step-label">{step.label}</div>
       {/if}
     </li>
   {/each}

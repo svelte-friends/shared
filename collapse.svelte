@@ -1,13 +1,10 @@
 <script>
   export let label = '';
-  export let element = '';
   export let color = '#fff';
   let show = false;
   let open = false;
   let close = false;
-  let arrow = `<svg width="16" height="16" viewBox="0 0 16 16">
-                <path fill="#1A051D" fill-rule="nonzero" d="M3.415 6.65l3.826 4.464a1 1 0 0 0 1.518 0l3.826-4.463A1 1 0 0 0 11.825 5h-7.65a1 1 0 0 0-.76 1.65z"/>
-               </svg>`;
+  let arrow = `<svg width="16" height="16" viewBox="0 0 512 512"><path d="M256 294.1L383 167c9.4-9.4 24.6-9.4 33.9 0s9.3 24.6 0 34L273 345c-9.1 9.1-23.7 9.3-33.1.7L95 201.1c-4.7-4.7-7-10.9-7-17s2.3-12.3 7-17c9.4-9.4 24.6-9.4 33.9 0l127.1 127z"/></svg>`;
   function handleClick() {
     show = !show;
     open = !open;
