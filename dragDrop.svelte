@@ -1,10 +1,12 @@
 <script>
   export let backgroundColor = '#fff';
   export let labelColor = '#1a051d';
+    export let activeColor = 'white';
   export let items = [
-    { label: 'Item 0' },
+    { label: 'Item 0' }, 
     { label: 'Item 1' },
-  ];
+    { label: 'Item 2' },
+    ];
   let hovering = false;
   let itemStart;
   let itemEnd;
@@ -27,8 +29,10 @@
   const styleColor = `
   --dragDrop-background-color: ${backgroundColor};
   --dragDrop-label-color: ${labelColor};
+  --dragDrop-active-color: ${activeColor};
   `;
 </script>
+
 <style>
   .dragAndDrop {
     background-color: var(--dragDrop-background-color);
@@ -56,6 +60,7 @@
     box-shadow: 0 0 7px 0 rgba(40, 39, 40, 0.25);
   }
 </style>
+
 <ul
   class="dragAndDrop"
   style={styleColor}
@@ -77,8 +82,3 @@
     </li>
   {/each}
 </ul>
-
-
-
-
-
