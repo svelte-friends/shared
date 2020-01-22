@@ -55,7 +55,7 @@
   ul li:hover {
     background-color: var(--white);
   }
-  ul li + .draggableActive {
+  .draggableActive {
     background: var(--dragDrop-active-color);
     box-shadow: 0 0 7px 0 rgba(40, 39, 40, 0.25);
   }
